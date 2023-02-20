@@ -24,15 +24,15 @@ export default function SignUp() {
         <div class="signup">
             <h1>Create an Account</h1>
             <form onSubmit={handleLogin}>
-                <div>
+                <div class="input">
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" value={username} onChange={handleUsernameChange} />
                 </div>
-                <div>
+                <div class="input">
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" value={password} onChange={handlePasswordChange} />
                 </div>
-                <div>
+                <div class="input">
                     <label htmlFor="password">Confirm Password:</label>
                     <input type="password" id="password" value={password} onChange={handlePasswordChange} />
                 </div>
