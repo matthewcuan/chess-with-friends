@@ -1,9 +1,14 @@
 .main {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgb(45, 48, 56);
+}
+
+button {
+  margin: 15px;
 }
 
 .board {
