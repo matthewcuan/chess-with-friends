@@ -15,6 +15,12 @@ export default function Game() {
       promotion: 'q'
     })
 
+    if (game.isGameOver()) {
+      const winner = (game.turn() === 'w' ? 'White' : 'Black');
+      alert(`${winner} wins!`);
+      game.reset();
+    }
+
     // legal move
     if (move) {
       setGame(game);
