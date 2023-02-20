@@ -12,7 +12,7 @@
 - stream-chat (for live chat)
 - react-router-dom (for routes)
 
-## Repo Structure
+## Client Repo Structure
 
 ├── src
 │   ├── components
@@ -21,8 +21,6 @@
 │   │   ├── game.js
 │   │   ├── game_page.js
 │   │   ├── game_history.js
-│   ├── router
-│   │   ├── past_games.js
 │   ├── index.js
 │   ├── index.css
 │   ├── app.js
@@ -31,7 +29,6 @@
 │   ├── index.html
 │   ├── mainfest.json
 │   ├── robots.txt
-├── dist (or build
 ├── node_modules
 ├── package.json
 ├── package-lock.json 
