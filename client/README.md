@@ -12,7 +12,7 @@
 - stream-chat (for live chat)
 - react-router-dom (for routes)
 
-## Client Repo Structure
+## Client Structure
 
 ├── src
 │   ├── components
