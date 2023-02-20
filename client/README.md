@@ -1,7 +1,9 @@
-## To Implement
+## To do
 
-- Set up react app
-- Write logic for chess game
+[X] Set up react app
+[X] Write logic for chess game
+[ ] Build pages for front end
+[ ] Connect to backend
 
 ## Packages
 

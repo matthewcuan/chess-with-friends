@@ -1,3 +1,8 @@
+## TODO
+
+[ ] Set up mongo
+[ ] Set up routes
+
 ## Packages
 
 - uuid (for generating unique ids for users)
