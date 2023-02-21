@@ -10,9 +10,10 @@ button {
   margin: 15px;
 }
 
-.login {
+.onboard {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 

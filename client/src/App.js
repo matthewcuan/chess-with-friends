@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route }
 import Login from "./components/login";
 import SignUp from "./components/sign_up";
 import History from "./components/history";
+import Password from "./components/password";
 
 export default function App() {
 
@@ -13,6 +14,7 @@ export default function App() {
     <Router>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/password" element={<Password />} />
           <Route path="/game" element={<Game />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/history" element={<History />} />

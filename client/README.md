@@ -1,6 +1,7 @@
 ## To do
 
 [X] Set up react app
+
 [X] Write logic for chess game
 [ ] Build pages for front end
 [ ] Connect to backend
@@ -15,7 +16,7 @@
 ## Client Structure
 
 ├── src
-│   ├── components
+│   ├── components 
 │   │   ├── login.js
 │   │   ├── sign_up.js
 │   │   ├── game.js
@@ -33,3 +34,13 @@
 ├── package.json
 ├── package-lock.json 
 └── .gitignore
+
+## Routes
+
+PATHS         OPERATIONS
+------------------------
+/           | getAllUsers -> checks if player has an account
+/password   | getUser -> checks if player input correct password
+/game       | 
+/signup     | addUser -> add player's login info to db
+/history    |
