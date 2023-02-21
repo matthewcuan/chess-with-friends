@@ -7,6 +7,7 @@ import Login from "./components/login";
 import SignUp from "./components/sign_up";
 import History from "./components/history";
 import Password from "./components/password";
+import ProfilePage from "./components/profile"
 
 export default function App() {
 
@@ -15,6 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/password" element={<Password />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/game" element={<Game />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/history" element={<History />} />

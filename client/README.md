@@ -1,7 +1,6 @@
 ## To do
 
 [X] Set up react app
-
 [X] Write logic for chess game
 [ ] Build pages for front end
 [ ] Connect to backend
@@ -19,8 +18,8 @@
 │   ├── components 
 │   │   ├── login.js
 │   │   ├── sign_up.js
+│   │   ├── profile.js
 │   │   ├── game.js
-│   │   ├── game_page.js
 │   │   ├── game_history.js
 │   ├── index.js
 │   ├── index.css
@@ -40,7 +39,8 @@
 PATHS         OPERATIONS
 ------------------------
 /           | getAllUsers -> checks if player has an account
-/password   | getUser -> checks if player input correct password
-/game       | 
+/password   | getUserbyId -> checks if player input correct password
+/profile/:id| getGameById -> returns games played by player
+/game       | postGame -> adds game history to db
 /signup     | addUser -> add player's login info to db
-/history    |
+/history    | getGames -> returns all public games

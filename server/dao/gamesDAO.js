@@ -1,6 +1,6 @@
 import mongodb from "mongodb";
 
-// TODO: injectDB, addGame, getPublicGames, getGamesByUserID
+// TODO: addGame, getPublicGames, getGamesByUserID
 
 export default class GamesDAO {
     static async injectDB(conn) {

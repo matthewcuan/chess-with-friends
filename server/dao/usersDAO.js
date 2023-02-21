@@ -1,6 +1,6 @@
 import mongodb from 'mongodb';
 
-// TODO: injectDB, addUser, getUser
+// TODO: addUser, getUser, getAllUsers
 
 export default class UsersDAO {
     static async injectDB(conn) {
