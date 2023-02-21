@@ -2,7 +2,8 @@
 
 [X] Set up react app
 [X] Write logic for chess game
-[ ] Build pages for front end
+[X] Build pages for front end
+[ ] Complete login mechanism
 [ ] Connect to backend
 
 ## Packages
