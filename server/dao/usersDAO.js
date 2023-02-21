@@ -18,7 +18,11 @@ export default class UsersDAO {
         
     }
 
-    static async getGUser(username) {
+    static async getAllUsers() {
+        
+    }
+
+    static async getUser(username) {
 
     }
 
