@@ -1,29 +1,52 @@
 import mongodb from 'mongodb';
 
+const ObjectId = mongodb.ObjectID
+
+let users
 // TODO: addUser, getUser, getAllUsers
 
 export default class UsersDAO {
     static async injectDB(conn) {
-        if (reviews) {
-          return
-        }
-        try {
-          reviews = await conn.db("reviews").collection("reviews")
-        } catch (e) {
-          console.error(`Unable to establish collection handles in userDAO: ${e}`)
-        }
+      if (users) {
+        return
       }
+      try {
+        users = await conn.db("chess").collection("users")
+      } catch (e) { 
+       console.error(`Unable to establish collection handles in userDAO: ${e}`)
+      }
+    }
 
-    static async addUser(username, password) {
-        
+    static async addUser(user, password) {
+      try {
+        const userDoc = {
+          user: user,
+          password: password
+        }
+        console.log("adding user")
+        return await users.insertOne(userDoc)
+      } catch (e) {
+        console.error(`Unable to add review: ${e}`)
+        return { error: e }
+      }
     }
 
     static async getAllUsers() {
-        
+      try {
+        return await users.find({})
+      } catch (e) {
+        console.error(`Unable to find users: ${e}`)
+        return { error: e }
+      }
     }
 
-    static async getUser(username) {
-
+    static async getUser(user) {
+      try {
+        return await users.findOne({ user: user })
+      } catch (e) {
+        console.error(`Unable to find user: ${e}`)
+        return { error: e }
+      }
     }
 
 }
