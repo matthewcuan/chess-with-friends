@@ -31,19 +31,12 @@ export default class UsersDAO {
       }
     }
 
-    static async getAllUsers() {
-      try {
-        return await users.find({})
-      } catch (e) {
-        console.error(`Unable to find users: ${e}`)
-        return { error: e }
-      }
-    }
-
     static async getUser(user) {
       try {
+        console.log("attempting to find user")
         return await users.findOne({ user: user })
       } catch (e) {
+        console.log("user not found")
         console.error(`Unable to find user: ${e}`)
         return { error: e }
       }

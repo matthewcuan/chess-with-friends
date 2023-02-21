@@ -36,11 +36,16 @@ export default class UserController {
             const user = req.body.user
             const password = req.body.password
             console.log('user', user)
+            if (UsersDAO.getUser(user)) {
+                console.error(`That username (${user}) already exists.`)
+                res.json("user already exists")
+                return
+            }
             const reviewResponse = await UsersDAO.addUser(
                 user,
                 password
-        )
-            res.json({ status: "success" })
+            )
+            res.json({ status: "success" })       
         } catch (e) {
             res.status(500).json({ error: e.message })
         } 
