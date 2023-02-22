@@ -17,7 +17,7 @@ export default function Password() {
           event.stopPropagation();
           return ;
         }
-        console.log(`username: ${password}`)
+        console.log(`password: ${password}`)
         navigate('/game');
         setValidated(true);
       };

@@ -1,12 +1,14 @@
 import { React, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Game() {
   
   const [game, setGame] = useState(new Chess());
   const [history, setHistory] = useState([game.fen()]);
+  
+  const navigate = useNavigate();
   
   function handlePieceDrop(source, target) {
     let move = game.move({
@@ -43,8 +45,8 @@ export default function Game() {
           onPieceDrop={handlePieceDrop}
         />
       </div>
-      <button>
-        <Link to="/">Exit Game</Link>
+      <button onClick={() => navigate('/')}>
+        Exit Game
       </button>
     </div>
   ) 

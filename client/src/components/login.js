@@ -27,13 +27,14 @@ export default function Login() {
             <h1>Multiplayer Chess</h1>
             <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="input" controlId="validationCustomUsername">
-                    <Form.Label>Username: </Form.Label>
+                    <Form.Label>Login: </Form.Label>
                     <Form.Control
                         name="username"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter username here"
+                        autoComplete="false"
                         required
                     />
                 </Form.Group>

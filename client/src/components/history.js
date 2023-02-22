@@ -1,15 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function History() {
+
+    const navigate = useNavigate()
+
     return (
         <div className="login">
             <h1>
                 This page will contain publicly saved games.
             </h1>
-            <button>
-                <Link to="/">Return to login</Link>
+            <button onClick={() => navigate('/')}>
+                Return to login
             </button>
         </div>
     )   
