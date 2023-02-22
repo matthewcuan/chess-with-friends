@@ -1,20 +1,6 @@
 import UsersDAO from "../dao/usersDAO.js";
 
 export default class UserController {
-    
-    static async apiGetAllUsers(req, res, next) {
-        try {
-            let users = await UsersDAO.getAllUsers()
-            if (!users) {
-              res.status(404).json({ error: "Not found" })
-              return
-            }
-            res.json(users)
-        } catch (e) {
-            console.log(`api, ${e}`)
-            res.status(500).json({ error: e })
-        }
-    }
 
     static async apiGetUser(req, res, next) {
         try {
@@ -35,8 +21,9 @@ export default class UserController {
         try {
             const user = req.body.user
             const password = req.body.password
+            let exists = await UsersDAO.getUser(user)
             console.log('user', user)
-            if (UsersDAO.getUser(user)) {
+            if (exists) {
                 console.error(`That username (${user}) already exists.`)
                 res.json("user already exists")
                 return
