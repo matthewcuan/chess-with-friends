@@ -30,7 +30,7 @@ Two player chess MERN full stack web app played on separate or a single device.
         - Create an account -> account information is saved to db
             1. Check if the username already exists in the db (getAllUsers)
             2. If it is not, create a new account (postUser)
-        - Login -> user logins into their account and is theory will be able to play games and access past private games 
+        - Login -> user logins into their account and in theory will be able to play games and access past private and public games 
             1. Check if user exists
             2. Check if password is correct
             3. Enter profile/game page
