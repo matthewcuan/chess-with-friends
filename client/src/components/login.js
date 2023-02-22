@@ -1,71 +1,51 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button, InputGroup } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 export default function Login() {
 
-    const { register, errors } = useForm();
-
     const [validated, setValidated] = useState(false);
+    const [username, setUsername] = useState("");
+
+    const navigate = useNavigate();
     
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
+          alert("Username required!")
           event.preventDefault();
           event.stopPropagation();
+          return ;
         }
-    
+        console.log(`username: ${username}`)
+        navigate('/password');
         setValidated(true);
       };
-    
 
     return (
         <div className="onboard">
             <h1>Multiplayer Chess</h1>
-            <Form className="input" noValidate validated={validated} onSubmit={handleSubmit}>
-                <Form.Group controlId="username">
+            <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form.Group className="input" controlId="validationCustomUsername">
                     <Form.Label>Username: </Form.Label>
-                        <InputGroup hasValidation>
-                            <Form.Control
-                            type="text"
-                            placeholder="Username"
-                            aria-describedby="inputGroupPrepend"
-                            required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                            Please choose a username.
-                            </Form.Control.Feedback>
-                        </InputGroup>
-                    {/* <Form.Control 
-                        required
-                        type="text"
+                    <Form.Control
                         name="username"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter username here"
+                        required
                     />
-                    <Form.Control.Feedback type="invalid">
-                        Please enter a username.
-                    </Form.Control.Feedback> */}
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    <Link to="/password">Next</Link>
+                    Next
                 </Button>
             </Form>
-            {/* <form onSubmit={handleUsername}>
-                <div className="input">
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" value={username} onChange={handleUsernameChange} />
-                </div>
-                <button type="submit">
-                    <Link to="/password">Next</Link>
-                </button>
-            </form> */}
-            <button>
-                <Link to="/signup">Create Account</Link>
+            <button onClick={() => navigate('/signup')}>
+                Create Account
             </button>
-            <button>
-                <Link to="/history">View Games</Link>
+            <button onClick={() => navigate('/history')}>
+                Games
             </button>
         </div>
     )

@@ -1,29 +1,61 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 export default function SignUp() {
 
+    const [validated, setValidated] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
   
-    function handleUsernameChange(event) {
-      setUsername(event.target.value);
-    }
+    const navigate = useNavigate();
   
-    function handlePasswordChange(event) {
-      setPassword(event.target.value);
-    }
-  
-    function handleLogin(event) {
-      event.preventDefault();
-      // code to handle login functionality
-    }
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+          alert("Both username and password required!")
+          event.preventDefault();
+          event.stopPropagation();
+          return ;
+        }
+        console.log(`username: ${username}`)
+        console.log(`password: ${password}`)
+        navigate('/game');
+        setValidated(true);
+      
+    };
 
     return (
-        <div class="signup">
+        <div className="signup">
             <h1>Create an Account</h1>
-            <form onSubmit={handleLogin}>
+            <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form.Group className="input" controlId="validationCustomUsername">
+                    <Form.Label>Username: </Form.Label>
+                    <Form.Control
+                        name="username"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Enter username here"
+                        required
+                    />
+                </Form.Group>
+                <Form.Group className="input" controlId="validationCustomUsername">
+                    <Form.Label>Password: </Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password here"
+                        required
+                    />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Sign Up
+                </Button>
+            </Form>
+            {/* <form onSubmit={handleLogin}>
                 <div class="input">
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" value={username} onChange={handleUsernameChange} />
@@ -33,15 +65,15 @@ export default function SignUp() {
                     <input type="password" id="password" value={password} onChange={handlePasswordChange} />
                 </div>
                 <div class="input">
-                    <label htmlFor="password">Confirm Password:</label>
+                    <label htmlFor="password">Confirm Password: </label>
                     <input type="password" id="password" value={password} onChange={handlePasswordChange} />
                 </div>
                 <button type="submit">
-                    <Link to="/game">Play Game</Link>
+                    Play Game
                 </button>
-            </form>
-            <button>
-                <Link to="/">Return to login</Link>
+            </form> */}
+            <button onClick={() => navigate('/')}>
+                Return to login
             </button>
         </div>
     )   

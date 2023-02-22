@@ -13,7 +13,7 @@ button {
 .onboard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center;  
   align-items: center;
 }
 
@@ -29,7 +29,7 @@ button {
   margin: 5px;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
