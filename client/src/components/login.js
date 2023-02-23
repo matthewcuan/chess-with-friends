@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-// import axios from "axios";
+import axios from "axios";
 
 export default function Login() {
 
@@ -19,9 +19,22 @@ export default function Login() {
           return ;
         }
 
-        console.log(`username: ${username}`)
-        navigate('/password');
-        setValidated(true);
+        const configuration = {
+            method: "get",
+            url: `http://localhost:8000/api/v1/users/login/${username}`,
+        };
+
+        axios(configuration)
+        .then(function (response) {
+            console.log(response.data);
+            navigate("/password");
+            setValidated(true);
+        })
+        .catch((error) => {
+            alert("User not found. Sign up for an account to play.");
+            event.preventDefault();
+            event.stopPropagation();
+        })
       };
 
     return (
