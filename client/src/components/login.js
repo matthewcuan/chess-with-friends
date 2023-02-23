@@ -7,6 +7,7 @@ export default function Login() {
 
     const [validated, setValidated] = useState(false);
     const [username, setUsername] = useState("");
+    const [data, setData] = useState("")
 
     const navigate = useNavigate();
     
@@ -25,16 +26,27 @@ export default function Login() {
         };
 
         axios(configuration)
-        .then(function (response) {
-            console.log(response.data);
-            navigate("/password");
+        .then((response) => {
+            console.log(response.data)
+            setData(response.data)
             setValidated(true);
         })
         .catch((error) => {
-            alert("User not found. Sign up for an account to play.");
+            console.log("error fetching user from db")
             event.preventDefault();
             event.stopPropagation();
         })
+
+        if (data) {
+            navigate("/password");
+            setValidated(true);
+        } else {
+            alert("User not found.")
+            event.preventDefault();
+            event.stopPropagation();
+            return ;
+        }
+
       };
 
     return (
