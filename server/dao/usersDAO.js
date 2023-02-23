@@ -26,7 +26,7 @@ export default class UsersDAO {
         console.log("adding user")
         return await users.insertOne(userDoc)
       } catch (e) {
-        console.error(`Unable to add review: ${e}`)
+        console.error(`Unable to add user: ${e}`)
         return { error: e }
       }
     }

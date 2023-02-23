@@ -19,7 +19,7 @@ export default class UserController {
 
     static async apiPostUser(req, res, next) {
         try {
-            const user = req.body.user
+            const user = req.body.username
             const password = req.body.password
             let exists = await UsersDAO.getUser(user)
             console.log('user', user)
