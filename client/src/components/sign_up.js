@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 export default function SignUp() {
 
@@ -18,6 +19,27 @@ export default function SignUp() {
           event.stopPropagation();
           return ;
         }
+
+        const configuration = {
+            method: "post",
+            url: `http://localhost:8000/api/v1/users/signup`,
+            data: {
+                username,
+                password
+            }
+        };
+
+        axios(configuration)
+        .then((response) => {
+            console.log(response.data);
+            console.log("success")
+        })
+        .catch((error) => {
+            console.log("error adding user to db")
+            event.preventDefault();
+            event.stopPropagation();
+        })
+
         console.log(`username: ${username}`)
         console.log(`password: ${password}`)
         navigate('/game');
