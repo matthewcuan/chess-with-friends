@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import Cookies from "universal-cookie";
 
 export default function Password() {
 
@@ -8,14 +9,23 @@ export default function Password() {
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
+    const cookies = new Cookies();
+    const user_password = cookies.get("PASSWORD");
+    console.log(user_password);
+
     
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
-          alert("Password Required!")
-          event.preventDefault();
-          event.stopPropagation();
-          return ;
+            alert("Password required!")
+            event.preventDefault();
+            event.stopPropagation();
+            return ;
+        } else if (password !== user_password) {
+            alert("Incorrect password!")
+            event.preventDefault();
+            event.stopPropagation();
+            return ;
         }
         console.log(`password: ${password}`)
         navigate('/game');

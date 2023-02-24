@@ -1,15 +1,17 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import Cookies from "universal-cookie"
 import axios from "axios";
 
 export default function Login() {
 
     const [validated, setValidated] = useState(false);
     const [username, setUsername] = useState("");
-    const [data, setData] = useState("")
+    const [data, setData] = useState("");
 
     const navigate = useNavigate();
+    const cookies = new Cookies();
     
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -28,8 +30,12 @@ export default function Login() {
         axios(configuration)
         .then((response) => {
             console.log(response.data)
-            setData(response.data)
-            setValidated(true);
+            cookies.set("PASSWORD", response.data.password, {
+                path: "/password"
+              });
+            console.log(`Password: ${response.data.password}`);
+            console.log(`Password: ${cookies.get("PASSWORD")}`);
+            setData(response.data);
         })
         .catch((error) => {
             console.log("error fetching user from db")
