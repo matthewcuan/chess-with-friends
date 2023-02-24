@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import { BASE_API_URL } from "../utils/constants"
 import Cookies from "universal-cookie"
 import axios from "axios";
 
@@ -24,14 +25,14 @@ export default function Login() {
 
         const configuration = {
             method: "get",
-            url: `http://localhost:8000/api/v1/users/login/${username}`,
+            url: BASE_API_URL + `login/${username}`
         };
 
         axios(configuration)
         .then((response) => {
             console.log(response.data)
             cookies.set("PASSWORD", response.data.password, {
-                path: "/password"
+                path: BASE_API_URL + "/password"
               });
             console.log(`Password: ${response.data.password}`);
             console.log(`Password: ${cookies.get("PASSWORD")}`);
