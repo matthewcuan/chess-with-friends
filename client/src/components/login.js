@@ -36,23 +36,30 @@ export default function Login() {
               });
             console.log(`Password: ${response.data.password}`);
             console.log(`Password: ${cookies.get("PASSWORD")}`);
-            setData(response.data);
-        })
-        .catch((error) => {
-            console.log("error fetching user from db")
-            event.preventDefault();
-            event.stopPropagation();
-        })
-
-        if (data) {
+            // setData(response.data);
+            // event.preventDefault();
+            // event.stopPropagation();
             navigate("/password");
             setValidated(true);
-        } else {
-            alert("User not found.")
-            event.preventDefault();
-            event.stopPropagation();
+        })
+        .catch((error) => {
+            alert("User not found. Sign up for an account.")
+            console.log("error fetching user from db")
             return ;
-        }
+        })
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        // if (data) {
+        //     navigate("/password");
+        //     setValidated(true);
+        // } else {
+        //     alert("User not found.")
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        //     return ;
+        // }
 
       };
 
