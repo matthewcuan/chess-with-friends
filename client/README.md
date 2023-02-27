@@ -8,10 +8,10 @@
 
 ## Packages
 
-- use fetch api from js (for requests to server)
-- universal-cookie (for user authentication)
+[X] use fetch api from js (for requests to server)
+[X] universal-cookie (for user authentication)
 - stream-chat (for live chat)
-- react-router-dom (for routes)
+[X] react-router-dom (for routes)
 
 ## Client Structure
 

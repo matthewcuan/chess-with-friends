@@ -24,7 +24,10 @@ export default function HomePage() {
             <button onClick={() => navigate('/game')}>
                 Join Game
             </button>
-            <button onClick={() => navigate('/')}>
+            <button onClick={() => {
+                navigate('/');
+                cookies.remove("USER");
+            }}>
                 Log Out
             </button>
             <button onClick={() => navigate('/changepwd')}>

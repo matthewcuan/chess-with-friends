@@ -27,7 +27,7 @@ export default function Password() {
             event.stopPropagation();
             return ;
         }
-        console.log(`password: ${password}`)
+        cookies.remove("PASSWORD");
         navigate('/home');
         setValidated(true);
       };
