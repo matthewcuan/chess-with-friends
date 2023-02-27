@@ -1,6 +1,8 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import { BASE_API_URL } from "../utils/constants";
+import Cookies from "universal-cookie";
 import axios from "axios";
 
 export default function SignUp() {
@@ -10,6 +12,7 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
   
     const navigate = useNavigate();
+    const cookies = new Cookies();
   
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -34,6 +37,11 @@ export default function SignUp() {
         .then((response) => {
             if (response.data.status) {
                 console.log(response.data);
+                
+                cookies.set("USER", username, {
+                    path: BASE_API_URL
+                });
+
                 console.log("success");
                 navigate('/profile');
                 setValidated(true);

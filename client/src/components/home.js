@@ -8,7 +8,7 @@ import Cookies from "universal-cookie";
     // 3. Log out
     // 4. View public games
 // private game displayed below options
-export default function HomePage() {
+export default function ProfilePage() {
 
     const navigate = useNavigate();
 
