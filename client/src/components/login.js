@@ -9,13 +9,13 @@ export default function Login() {
 
     const [validated, setValidated] = useState(false);
     const [username, setUsername] = useState("");
-    const [data, setData] = useState("");
 
     const navigate = useNavigate();
     const cookies = new Cookies();
     
     const handleSubmit = (event) => {
         const form = event.currentTarget;
+        // checks if there is a username input
         if (form.checkValidity() === false) {
           alert("Username required!")
           event.preventDefault();
@@ -29,19 +29,16 @@ export default function Login() {
         };
 
         axios(configuration)
+        // if user exists
         .then((response) => {
             console.log(response.data)
             cookies.set("PASSWORD", response.data.password, {
                 path: BASE_API_URL + "/password"
               });
-            console.log(`Password: ${response.data.password}`);
-            console.log(`Password: ${cookies.get("PASSWORD")}`);
-            // setData(response.data);
-            // event.preventDefault();
-            // event.stopPropagation();
             navigate("/password");
             setValidated(true);
         })
+        // if user does not exist
         .catch((error) => {
             alert("User not found. Sign up for an account.")
             console.log("error fetching user from db")
@@ -50,17 +47,6 @@ export default function Login() {
 
         event.preventDefault();
         event.stopPropagation();
-
-        // if (data) {
-        //     navigate("/password");
-        //     setValidated(true);
-        // } else {
-        //     alert("User not found.")
-        //     event.preventDefault();
-        //     event.stopPropagation();
-        //     return ;
-        // }
-
       };
 
     return (

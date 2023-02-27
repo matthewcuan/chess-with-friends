@@ -13,6 +13,7 @@ export default function SignUp() {
   
     const handleSubmit = (event) => {
         const form = event.currentTarget;
+        // check if the user input a username and password
         if (form.checkValidity() === false) {
           alert("Both username and password required!")
           event.preventDefault();
@@ -36,8 +37,6 @@ export default function SignUp() {
         })
         .catch((error) => {
             console.log("error adding user to db")
-            event.preventDefault();
-            event.stopPropagation();
         })
 
         console.log(`username: ${username}`)
@@ -50,7 +49,7 @@ export default function SignUp() {
     return (
         <div className="signup">
             <h1>Create an Account</h1>
-            <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form className="form" noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
                 <Form.Group className="input" controlId="validationCustomUsername">
                     <Form.Label>Username: </Form.Label>
                     <Form.Control
