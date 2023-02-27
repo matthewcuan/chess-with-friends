@@ -26,7 +26,7 @@ export default class UserController {
             if (exists) {
                 console.error(`That username (${user}) already exists.`)
                 res.json("user already exists")
-                return
+                return ;
             }
             const reviewResponse = await UsersDAO.addUser(
                 user,
@@ -36,7 +36,6 @@ export default class UserController {
         } catch (e) {
             res.status(500).json({ error: e.message })
         } 
-    }   
+    }       
 
-    
 }

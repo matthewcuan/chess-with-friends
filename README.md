@@ -25,16 +25,16 @@ Two player chess MERN full stack web app played on separate or a single device.
 
 ## TODO
 
-[ ] Set up login mechanism
+[X] Set up login mechanism
     - User should be able to:
-        - Create an account -> account information is saved to db
-            1. Check if the username already exists in the db (getAllUsers)
+        [X] Create an account -> account information is saved to db
+            1. Check if the username already exists in the db (getUser)
             2. If it is not, create a new account (postUser)
-        - Login -> user logins into their account and in theory will be able to play games and access past private and public games 
+        [X] Login -> user logins into their account and in theory will be able to play games and access past private and public games 
             1. Check if user exists
             2. Check if password is correct
             3. Enter profile/game page
-    [ ] Create operations in api and dao files
-    [ ] Connect backend to mongo
-    [ ] Configure client to take inputs and send to server
-    [ ] Connect client to server
+    [X] Create operations in api and dao files
+    [X] Connect backend to mongo
+    [X] Configure client to take inputs and send to server
+    [X] Connect client to server
