@@ -35,7 +35,7 @@ export default function SignUp() {
             if (response.data.status) {
                 console.log(response.data);
                 console.log("success");
-                navigate('/game');
+                navigate('/profile');
                 setValidated(true);
             } else {
                 alert("Username taken. Try another.");
@@ -79,23 +79,6 @@ export default function SignUp() {
                     Sign Up
                 </Button>
             </Form>
-            {/* <form onSubmit={handleLogin}>
-                <div class="input">
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" value={username} onChange={handleUsernameChange} />
-                </div>
-                <div class="input">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-                </div>
-                <div class="input">
-                    <label htmlFor="password">Confirm Password: </label>
-                    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-                </div>
-                <button type="submit">
-                    Play Game
-                </button>
-            </form> */}
             <button onClick={() => navigate('/')}>
                 Return to login
             </button>

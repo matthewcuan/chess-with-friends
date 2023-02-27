@@ -1,19 +1,39 @@
-import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import { React } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
-// will contain public games, private games, and a play button
+// options to: 
+    // 1. Start a game
+    // 2. Join a game
+    // 3. Log out
+    // 4. View public games
+// private game displayed below options
 export default function ProfilePage() {
+
+    const navigate = useNavigate();
+
+    const cookies = new Cookies();
+    const user = cookies.get("USER");
 
     return (
         <div>
-            <button>
-                <Link to="/history">View Games</Link>
+            <h1>Welcome, {user}!</h1>
+            <button onClick={() => navigate('/game')}>
+                Start Game
             </button>
-            <button>
-                <Link to="/game">Play Game</Link>
+            <button onClick={() => navigate('/game')}>
+                Join Game
+            </button>
+            <button onClick={() => navigate('/')}>
+                Log Out
+            </button>
+            <button onClick={() => navigate('/changepwd')}>
+                Change Password
             </button>
             <ul>
                 <li>Private Game</li>
+                <li>Public Game</li>
+                <li>Public Game</li>
                 <li>Private Game</li>
                 <li>Private Game</li>
             </ul>

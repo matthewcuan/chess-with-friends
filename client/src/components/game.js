@@ -45,7 +45,7 @@ export default function Game() {
           onPieceDrop={handlePieceDrop}
         />
       </div>
-      <button onClick={() => navigate('/')}>
+      <button onClick={() => navigate('/profile')}>
         Exit Game
       </button>
     </div>

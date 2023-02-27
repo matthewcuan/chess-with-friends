@@ -35,6 +35,9 @@ export default function Login() {
             cookies.set("PASSWORD", response.data.password, {
                 path: BASE_API_URL + "/password"
               });
+            cookies.set("USER", response.data.user, {
+                path: BASE_API_URL
+              });
             navigate("/password");
             setValidated(true);
         })

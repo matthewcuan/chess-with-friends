@@ -57,9 +57,11 @@ PATHS         OPERATIONS
             - compares input password with password associated with user account
         c. Enters profile page (../profile/:user)
             - can choose between:
-                1. playing a game
-                2. viewing private games
-                3. viewing public games
+                1. starting a game
+                2. joining a game
+                3. logging out
+            - all games (public + private) displayed below options
+                1. user can choose to filter which games appear 
     2. Signing up
         a. Enters username and password (addUser) (../signup)
             - posts new account into db to be accessed later on login

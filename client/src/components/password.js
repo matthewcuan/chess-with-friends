@@ -28,7 +28,7 @@ export default function Password() {
             return ;
         }
         console.log(`password: ${password}`)
-        navigate('/game');
+        navigate('/profile');
         setValidated(true);
       };
 
