@@ -32,18 +32,21 @@ export default function SignUp() {
 
         axios(configuration)
         .then((response) => {
-            console.log(response.data);
-            console.log("success")
+            if (response.data.status) {
+                console.log(response.data);
+                console.log("success");
+                navigate('/game');
+                setValidated(true);
+            } else {
+                alert("Username taken. Try another.");
+            }
         })
         .catch((error) => {
-            console.log("error adding user to db")
+            console.log("error adding user to db");
         })
 
-        console.log(`username: ${username}`)
-        console.log(`password: ${password}`)
-        navigate('/game');
-        setValidated(true);
-      
+        event.preventDefault();
+        event.stopPropagation();
     };
 
     return (
