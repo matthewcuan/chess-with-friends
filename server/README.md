@@ -1,12 +1,12 @@
 ## TODO
 
-[ ] Set up mongo
-[ ] Set up routes
+[X] Set up mongo
+[X] Set up routes
 
 ## Packages
 
-- uuid (for generating unique ids for users)
-- nodemon (for automatically restarting node app when changed)
+[ ] uuid (for generating unique ids for users)
+[ ] nodemon (for automatically restarting node app when changed)
 
 ## Server Structure
 

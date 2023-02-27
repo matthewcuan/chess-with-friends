@@ -38,3 +38,21 @@ Two player chess MERN full stack web app played on separate or a single device.
     [X] Connect backend to mongo
     [X] Configure client to take inputs and send to server
     [X] Connect client to server
+
+[ ] Set up multiplayer feature (combination of frontend + backend; should not require database)
+    - Once the user logins or sign ups:
+        [ ] They will be greeted by a basic profile page where they can:
+            [ ] Start a game
+                1. A new game is created (with a unique id)
+                2. The user is provided with the code
+                3. The user sends the code to the other user
+                4. Once the other user enters the game, the game starts
+            [ ] Join a game
+                1. The user receives the code from the inviting user
+                2. The user inputs the code
+                3. The game starts
+            [ ] Change their password
+                1. User inputs their old password (getUser checks if password is correct)
+                2. User inputs their new password (updateUser updates password)
+            [ ] Log out
+                1. User returns to home/login page
