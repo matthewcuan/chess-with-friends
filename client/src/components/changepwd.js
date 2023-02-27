@@ -8,7 +8,7 @@ export default function ChangePwd() {
     return (
         <div>
             <h1>User will be able to change password here.</h1>
-            <button onClick={() => navigate('/profile')}>
+            <button onClick={() => navigate('/home')}>
                 Return to profile
             </button>
         </div>

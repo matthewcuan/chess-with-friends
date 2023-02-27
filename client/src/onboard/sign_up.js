@@ -43,7 +43,7 @@ export default function SignUp() {
                 });
 
                 console.log("success");
-                navigate('/profile');
+                navigate('/home');
                 setValidated(true);
             } else {
                 alert("Username taken. Try another.");
