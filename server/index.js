@@ -1,7 +1,12 @@
 import dotenv from 'dotenv'
-import app from "./server.js"
+// import app from "./server.js"
 import mongodb from "mongodb"
 import UsersDAO from "./dao/usersDAO.js"
+import express from "express"
+import cors from "cors"
+import users from "./api/users.routes.js"
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 dotenv.config()
 const MongoClient = mongodb.MongoClient
@@ -10,6 +15,19 @@ const chess_password = process.env.CHESS_KEY
 const uri = `mongodb+srv://${chess_username}:${chess_password}@cluster0.mqza9mv.mongodb.net/?retryWrites=true&w=majority`
 
 const port = 8000
+
+const app = express();
+const server = createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+        credentials: true,
+    }
+});
+
+app.use(cors());
+app.use(express.json());
 
 MongoClient.connect(
     uri,
@@ -27,5 +45,21 @@ MongoClient.connect(
     app.listen(port, () => {
         console.log(`listening on port ${port}`)
     })
+
+    io.on("connection", (socket) => {
+        console.log('a user connected');
+        
+        socket.on('disconnect', () => {
+          console.log('user disconnected');
+        });
+      });
+
+    app.use("/api/v1/users", users);
+    app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
+    
+    server.listen(5000, () => {
+        console.log("Server listening on port 5000");
+    });
 })
+
 

@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useNavigate } from "react-router-dom";
+import io from "socket.io-client";
 
 export default function Game() {
   
@@ -9,6 +10,10 @@ export default function Game() {
   const [history, setHistory] = useState([game.fen()]);
   
   const navigate = useNavigate();
+
+  var socket = io("http://localhost:5000");
+
+  socket.on('connected', console.log("connected"));
   
   function handlePieceDrop(source, target) {
     let move = game.move({
