@@ -11,12 +11,12 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/api/v1/users", users)
-app.use("*", (req, res) => 
+app.use("/api/v1/", (req, res) => 
 res.status(404).json({error: "not found"}))
 
 const server = createServer(app);
 const io = new Server(server, { 
-    cors: { origin: "*" }
+    cors: { origin: "http://localhost:4000" }
 });
 
 io.on("connection", (socket) => {
@@ -27,8 +27,8 @@ io.on("connection", (socket) => {
   });
 });
   
-server.listen(8080, () => {
-  console.log(`listening on *:8080`);
+server.listen(4000, () => {
+  console.log(`listening on *:4000`);
 });
 
 export default app
