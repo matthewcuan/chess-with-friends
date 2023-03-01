@@ -20,15 +20,15 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-    console.log(`Client ${socket.id} connected`);
-
-  // Handle join room event
-  socket.on("joinRoom", ({ roomId }) => {
-    socket.join(roomId);
-    console.log(`Client ${socket.id} joined room ${roomId}`);
+  console.log('a user connected');
+  
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
   });
 });
   
-server.listen(3030)
+server.listen(8080, () => {
+  console.log(`listening on *:8080`);
+});
 
 export default app
