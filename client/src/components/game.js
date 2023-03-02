@@ -18,12 +18,12 @@ export default function Game() {
   const user = cookies.get("USER");
 
   useEffect( () => {
-    const navigationTo = async () => {
+    const checkLoggedIn = async () => {
         if (!user) {
             navigate('/');
         }
     }
-    navigationTo();
+    checkLoggedIn();
   });
   
   function handlePieceDrop(source, target) {

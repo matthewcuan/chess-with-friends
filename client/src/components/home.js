@@ -16,12 +16,12 @@ export default function HomePage() {
     const user = cookies.get("USER");
 
     useEffect( () => {
-        const navigationTo = async () => {
+        const checkLoggedIn = async () => {
             if (!user) {
                 navigate('/');
             }
         }
-        navigationTo();
+        checkLoggedIn();
     });
     
 
