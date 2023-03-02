@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
@@ -14,6 +14,16 @@ export default function HomePage() {
 
     const cookies = new Cookies();
     const user = cookies.get("USER");
+
+    useEffect( () => {
+        const navigationTo = async () => {
+            if (!user) {
+                navigate('/');
+            }
+        }
+        navigationTo();
+    });
+    
 
     return (
         <div>

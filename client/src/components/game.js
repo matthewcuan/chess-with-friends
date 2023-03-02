@@ -1,7 +1,8 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 import io from "socket.io-client";
 
 export default function Game() {
@@ -13,7 +14,17 @@ export default function Game() {
 
   var socket = io("http://localhost:5000");
 
-  socket.on('connected', console.log("connected"));
+  const cookies = new Cookies();
+  const user = cookies.get("USER");
+
+  useEffect( () => {
+    const navigationTo = async () => {
+        if (!user) {
+            navigate('/');
+        }
+    }
+    navigationTo();
+  });
   
   function handlePieceDrop(source, target) {
     let move = game.move({
@@ -50,7 +61,10 @@ export default function Game() {
           onPieceDrop={handlePieceDrop}
         />
       </div>
-      <button onClick={() => navigate('/home')}>
+      <button onClick={() => {
+        navigate('/home')
+        socket.disconnect()
+      }}>
         Exit Game
       </button>
     </div>

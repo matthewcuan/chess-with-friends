@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Cookies from "universal-cookie";
@@ -11,7 +11,16 @@ export default function Password() {
     const navigate = useNavigate();
     const cookies = new Cookies();
     const user_password = cookies.get("PASSWORD");
-    console.log(user_password);
+    const user = cookies.get("USER");
+
+    useEffect( () => {
+        const navigationTo = async () => {
+            if (!user) {
+                navigate('/');
+            }
+        }
+        navigationTo();
+    });
 
     
     const handleSubmit = (event) => {
