@@ -45,7 +45,8 @@ MongoClient.connect(
     app.listen(port, () => {
         console.log(`listening on port ${port}`)
     })
-
+})
+.then(() => {
     io.on("connection", (socket) => {
         console.log('a user connected');
         
@@ -60,6 +61,6 @@ MongoClient.connect(
     server.listen(5000, () => {
         console.log("Server listening on port 5000");
     });
-})
+});
 
 
