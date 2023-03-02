@@ -41,7 +41,7 @@ Two player chess MERN full stack web app played on separate or a single device.
 
 [ ] Set up multiplayer feature (combination of frontend + backend; should not require database)
     - Once the user logins or sign ups:
-        [ ] They will be greeted by a basic profile page where they can:
+        [X] They will be greeted by a basic profile page where they can:
             [ ] Start a game
                 1. A new game is created (with a unique id)
                 2. The user is provided with the code
@@ -54,5 +54,5 @@ Two player chess MERN full stack web app played on separate or a single device.
             [ ] Change their password
                 1. User inputs their old password (getUser checks if password is correct)
                 2. User inputs their new password (updateUser updates password)
-            [ ] Log out
+            [X] Log out
                 1. User returns to home/login page

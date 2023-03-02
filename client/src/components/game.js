@@ -9,14 +9,22 @@ export default function Game() {
   
   const [game, setGame] = useState(new Chess());
   const [history, setHistory] = useState([game.fen()]);
+  const [socket, setSocket] = useState("");
   
   const navigate = useNavigate();
 
-  var socket = io("http://localhost:5000");
+  // checks if socket is connected
+  // if not, connect socket
+  if (!socket) {
+    console.log("connecting to socket")
+    setSocket(io("http://localhost:5000"));
+  }
 
   const cookies = new Cookies();
   const user = cookies.get("USER");
 
+  // checks if user is logged in
+  // if not, redirect to login page
   useEffect( () => {
     const checkLoggedIn = async () => {
         if (!user) {
@@ -53,6 +61,14 @@ export default function Game() {
     return false;
   };
 
+  function handleExit() {
+    navigate('/home');
+        console.log("leaving game")
+    if (socket) {
+      socket.disconnect();
+    }
+  };
+
   return (
     <div className="main">
       <div className="board">
@@ -61,13 +77,9 @@ export default function Game() {
           onPieceDrop={handlePieceDrop}
         />
       </div>
-      <button onClick={() => {
-        navigate('/home')
-        socket.disconnect()
-      }}>
+      <button onClick={() => handleExit()}>
         Exit Game
       </button>
     </div>
   ) 
-
-}
+};
