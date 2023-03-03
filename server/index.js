@@ -50,6 +50,10 @@ MongoClient.connect(
     io.on("connection", (socket) => {
         console.log('a user connected');
         
+        socket.on("createNewGame", (gameId) => {
+            socket.join(gameId);
+        });
+
         socket.on('disconnect', () => {
           console.log('user disconnected');
         });

@@ -18,6 +18,7 @@ export default function Game() {
   if (!socket) {
     console.log("connecting to socket")
     setSocket(io("http://localhost:5000"));
+    socket.on("createNewGame", )
   }
 
   const cookies = new Cookies();
