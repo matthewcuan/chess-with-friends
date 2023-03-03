@@ -8,13 +8,15 @@ export default function GlobalChat() {
     const cookies = new Cookies();
     const nickname = cookies.get("USER");
     const [message, setMessage] = useState("");
-    const [connected, setConnected] = useState(false);
-    const [socket, setSocket] = useState("");
+    // const [connected, setConnected] = useState(false);
+    // const [socket, setSocket] = useState("");
     
-    if (!connected) {
-        setSocket(io("http://localhost:5000"));
-        setConnected(true);
-    };
+    // if (!connected) {
+    //     setSocket(io("http://localhost:5000"));
+    //     setConnected(true);
+    // }
+
+    const socket = io("http://localhost:5000");
 
     // const form = document.getElementById('chat-form');
     const input = document.getElementById('chat-input');
@@ -31,6 +33,7 @@ export default function GlobalChat() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        event.stopPropagation();
         setMessage()
         if (input.value) {
             var chat = nickname + ": " + message;
@@ -44,9 +47,10 @@ export default function GlobalChat() {
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
         });
-    }
 
-    
+  
+
+    }
 
     return (
         <div>
