@@ -34,6 +34,13 @@ button {
   margin: 5px;
 }
 
+.game {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
