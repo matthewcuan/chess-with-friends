@@ -42,12 +42,12 @@ Two player chess MERN full stack web app played on separate or a single device.
 [ ] Set up multiplayer feature (combination of frontend + backend; should not require database)
     - Once the user logins or sign ups:
         [X] They will be greeted by a basic profile page where they can:
-            [ ] Start a game
+            [X] Start a game
                 1. A new game is created (with a unique id)
                 2. The user is provided with the code
                 3. The user sends the code to the other user
                 4. Once the other user enters the game, the game starts
-            [ ] Join a game
+            [X] Join a game
                 1. The user receives the code from the inviting user
                 2. The user inputs the code
                 3. The game starts
