@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client'
 import Cookies from 'universal-cookie';
 import { Form, Button } from "react-bootstrap";
@@ -9,18 +9,19 @@ export default function GlobalChat() {
     const nickname = cookies.get("USER");
     const [message, setMessage] = useState("");
     // const [connected, setConnected] = useState(false);
-    // const [socket, setSocket] = useState("");
+    const [socket, setSocket] = useState("");
+    const messagesRef = useRef(null);
     
     // if (!connected) {
     //     setSocket(io("http://localhost:5000"));
     //     setConnected(true);
     // }
 
-    const socket = io("http://localhost:5000");
+    // // const socket = io("http://localhost:5000");
 
-    // const form = document.getElementById('chat-form');
-    const input = document.getElementById('chat-input');
-    const messages = document.getElementById('chat-messages');
+    // // const form = document.getElementById('chat-form');
+    // const input = document.getElementById('chat-input');
+    // const messages = document.getElementById('chat-messages');
     
     // form.addEventListener('submit', function(e) {
     //     e.preventDefault();
@@ -31,34 +32,53 @@ export default function GlobalChat() {
     //     }
     // });
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        setMessage()
-        if (input.value) {
-            var chat = nickname + ": " + message;
-            socket.emit('chat message', chat);
-            setMessage("");
-        }
+    useEffect(() => {
+        const socket = io("http://localhost:5000");
+        setSocket(socket);
 
-        socket.on('chat message', function(msg) {
-            var item = document.createElement('li');
+        socket.on('connect', () => {
+            console.log('connected to socket');
+        });
+
+        socket.on('chat message', (msg) => {
+            const item = document.createElement('li');
             item.textContent = msg;
-            messages.appendChild(item);
+            console.log("adding message")
+            messagesRef.current.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
         });
 
-  
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
 
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        if (message.trim()) {
+            var chat = nickname + ": " + message;
+            console.log("emitting message")
+            socket.emit('chat message', chat);
+            setMessage("");
+        }
     }
+
+    // socket.on('chat message', function(msg) {
+    //     var item = document.createElement('li');
+    //     item.textContent = msg;
+    //     console.log("adding message")
+    //     messages.appendChild(item);
+    //     window.scrollTo(0, document.body.scrollHeight);
+    // });
 
     return (
         <div>
-            <ul id="chat-messages"></ul>
+            <ul id="chat-messages" ref={messagesRef}></ul>
             <Form id="chat-form" noValidate onSubmit={handleSubmit}>
-                <Form.Group controlId="chat-input">
+                <Form.Group>
                     <Form.Control
-                        // id="chat-input"
+                        id="chat-input"
                         name="message"
                         type="text"
                         value={message}
