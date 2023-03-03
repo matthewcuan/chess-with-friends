@@ -8,13 +8,16 @@ export default function GlobalChat() {
     const cookies = new Cookies();
     const nickname = cookies.get("USER");
     const [message, setMessage] = useState("");
+    const [connected, setConnected] = useState(false);
+    const [socket, setSocket] = useState("");
+    
+    if (!connected) {
+        setSocket(io("http://localhost:5000"));
+        setConnected(true);
+    };
 
-    var socket = io("http://localhost:5000");
-
-    var form = document.getElementById('chat-form');
-    console.log(form);
-    var input = document.getElementById('chat-input');
-    console.log(input);
+    // const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
     const messages = document.getElementById('chat-messages');
     
     // form.addEventListener('submit', function(e) {
@@ -30,18 +33,20 @@ export default function GlobalChat() {
         event.preventDefault();
         setMessage()
         if (input.value) {
-            setMessage(nickname + ": " + input.value);
-            socket.emit('chat message', message);
-            input.value = "";
+            var chat = nickname + ": " + message;
+            socket.emit('chat message', chat);
+            setMessage("");
         }
+
+        socket.on('chat message', function(msg) {
+            var item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
     }
 
-    socket.on('chat message', function(msg) {
-        var item = document.createElement('li');
-        item.textContent = msg;
-        messages.appendChild(item);
-        window.scrollTo(0, document.body.scrollHeight);
-    });
+    
 
     return (
         <div>
