@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Cookies from "universal-cookie";
+import { BASE_API_URL } from "../utils/constants";
 
 // options to: 
     // 1. Start a game
@@ -37,8 +38,10 @@ export default function HomePage() {
             event.stopPropagation();
             return ;
           }
-
-        navigate(`/game/${gameId}`)
+        cookies.set("GAME_ID", gameId, {
+            path: BASE_API_URL
+        })
+        navigate(`/game/`);
         setValidated(true);
     }
 

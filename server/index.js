@@ -50,9 +50,10 @@ MongoClient.connect(
     io.on("connection", (socket) => {
         console.log('a user connected');
         
-        // socket.on("createNewGame", (gameId) => {
-        //     socket.join(gameId);
-        // });
+        socket.on("createNewGame", (gameId) => {
+            socket.join(gameId);
+            console.log(`a user joined room ${gameId}`);
+        });
 
         socket.on('chat message', (msg) => {
             console.log('message: ' + msg);

@@ -10,32 +10,47 @@ export default function Game() {
   const [game, setGame] = useState(new Chess());
   const [history, setHistory] = useState([game.fen()]);
   const [socket, setSocket] = useState("");
-  
+  const newId = 1;
+
   const navigate = useNavigate();
-
-  // checks if socket is connected
-  // if not, connect socket
-  if (!socket) {
-    console.log("connecting to socket")
-    setSocket(io("http://localhost:5000"));
-    // socket.on("createNewGame", () => {
-    //   console.log("starting new game");
-    // })
-  }
-
   const cookies = new Cookies();
   const user = cookies.get("USER");
 
-  // checks if user is logged in
-  // if not, redirect to login page
-  useEffect( () => {
+  const gameId = cookies.get("GAME_ID");
+
+  useEffect(() => {
+
+    console.log("useEffect called")
     const checkLoggedIn = async () => {
         if (!user) {
             navigate('/');
         }
     }
     checkLoggedIn();
-  });
+
+    const socket = io("http://localhost:5000");
+    setSocket(socket);
+
+    socket.on('connect', () => {
+      console.log('connected to socket');
+    });
+
+    // socket.emit('createNewGame', newId);
+    // console.log(`created new game: ${newId}`)
+
+    if (!gameId) {
+      socket.emit('createNewGame', newId);
+      console.log(`created new game: ${newId}`)
+    } else {
+      socket.emit('createNewGame', gameId);
+      console.log(`joined game: ${gameId}`)
+    }
+    
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [navigate, user, gameId, newId]);
   
   function handlePieceDrop(source, target) {
     let move = game.move({

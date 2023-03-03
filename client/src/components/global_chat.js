@@ -8,29 +8,8 @@ export default function GlobalChat() {
     const cookies = new Cookies();
     const nickname = cookies.get("USER");
     const [message, setMessage] = useState("");
-    // const [connected, setConnected] = useState(false);
     const [socket, setSocket] = useState("");
     const messagesRef = useRef(null);
-    
-    // if (!connected) {
-    //     setSocket(io("http://localhost:5000"));
-    //     setConnected(true);
-    // }
-
-    // // const socket = io("http://localhost:5000");
-
-    // // const form = document.getElementById('chat-form');
-    // const input = document.getElementById('chat-input');
-    // const messages = document.getElementById('chat-messages');
-    
-    // form.addEventListener('submit', function(e) {
-    //     e.preventDefault();
-    //     if (input.value) {
-    //         var message = nickname.value + ": " + input.value;
-    //            socket.emit('chat message', message);
-    //         input.value = '';
-    //     }
-    // });
 
     useEffect(() => {
         const socket = io("http://localhost:5000");
@@ -64,19 +43,11 @@ export default function GlobalChat() {
         }
     }
 
-    // socket.on('chat message', function(msg) {
-    //     var item = document.createElement('li');
-    //     item.textContent = msg;
-    //     console.log("adding message")
-    //     messages.appendChild(item);
-    //     window.scrollTo(0, document.body.scrollHeight);
-    // });
-
     return (
         <div>
             <ul id="chat-messages" ref={messagesRef}></ul>
             <Form id="chat-form" noValidate onSubmit={handleSubmit}>
-                <Form.Group>
+                <Form.Group id="chat-input">
                     <Form.Control
                         id="chat-input"
                         name="message"
@@ -92,9 +63,6 @@ export default function GlobalChat() {
                     Send
                 </Button>
             </Form>
-            {/* <form id="chat-form" action="">
-                <input id="chat-input" autoComplete="off" /><button onClick={handleSubmit}>Send</button>
-            </form> */}
         </div>   
     )
 }
