@@ -39,7 +39,7 @@ Two player chess MERN full stack web app played on separate or a single device.
     [X] Configure client to take inputs and send to server
     [X] Connect client to server
 
-[ ] Set up multiplayer feature (combination of frontend + backend; should not require database)
+[X] Set up multiplayer feature (combination of frontend + backend; should not require database)
     - Once the user logins or sign ups:
         [X] They will be greeted by a basic profile page where they can:
             [X] Start a game
@@ -56,3 +56,17 @@ Two player chess MERN full stack web app played on separate or a single device.
                 2. User inputs their new password (updateUser updates password)
             [X] Log out
                 1. User returns to home/login page
+
+[ ] Implement actual multiplayer chess feature
+    [ ] Player starts game 
+        1. Randomize which player is black and which is white and orient board in correct position for each player
+        2. Display "Game initiated... waiting for other player" in chat
+    [ ] Second player joins game
+        1. Board should be orientated correctly
+        2. Display "Game started... white's move" in chat
+    [ ] Game begins
+        1. White makes move -> fen string emitted
+        2. Screens for both players should be updated to new positions 
+    [ ] Game ends
+        1. Display "${winner} won!"
+        2. Display options to rematch in same room or exit to home page
