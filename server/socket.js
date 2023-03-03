@@ -10,4 +10,6 @@ const initGame = (sio, socket) => {
     gameSocket.on("createNewGame", createNewGame)
 }
 
-function createNewGame(gameId)
+function createNewGame(gameId) {
+    gameSocket.join(gameId);
+}
