@@ -78,6 +78,9 @@ export default function HomePage() {
             <button onClick={() => navigate('/changepwd')}>
                 Change Password
             </button>
+            <button onClick={() => navigate('/gchat')}>
+                Chat with Others
+            </button>
             <ul>
                 <li>Private Game</li>
                 <li>Public Game</li>

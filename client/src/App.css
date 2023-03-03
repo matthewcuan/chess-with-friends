@@ -50,3 +50,23 @@ button {
 .board {
   width: 50%;
 }
+
+#chat-form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+
+#chat-input { border: none; padding: 0 1rem; width:100%; border-radius: 2rem; margin: 0.25rem; }
+      
+/* #chat-nickname { border: none; padding: 0 1rem; flex-grow: 0; border-radius: 2rem; margin: 0.25rem; } */
+      
+#chat-input:focus { outline: none; }
+
+#chat-button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+      
+#chat-form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+      
+#chat-messages { list-style-type: none; margin: 0; padding: 0; }
+      
+#chat-messages > li { padding: 0.5rem 1rem; }
+      
+#chat-messages > li:nth-child(odd) { background: #efefef; }
+      
+#chat-label { display: flex; align-items: center; padding: 10px }

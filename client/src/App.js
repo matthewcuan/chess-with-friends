@@ -9,6 +9,7 @@ import History from "./components/history";
 import Password from "./onboard/password";
 import HomePage from "./components/home";
 import ChangePwd from "./components/changepwd";
+import GlobalChat from "./components/global_chat";
 
 export default function App() {
 
@@ -21,7 +22,8 @@ export default function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/history" element={<History />} />
-          <Route path="/changepwd" element={<ChangePwd />}/>
+          <Route path="/changepwd" element={<ChangePwd />} />
+          <Route path="/gchat" element={<GlobalChat />} />
         </Routes>
     </Router>
     
