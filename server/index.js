@@ -61,8 +61,15 @@ MongoClient.connect(
         });
 
         socket.on('disconnect', () => {
-          console.log('user disconnected');
+            console.log('user disconnected');
         });
+
+        socket.on('game chat message', (msg) => {
+            console.log('message: ' + msg[0]);
+            io.to(`${msg[1]}`).emit('game chat message', msg[0]);
+        }
+            
+        )
       });
 
     app.use("/api/v1/users", users);

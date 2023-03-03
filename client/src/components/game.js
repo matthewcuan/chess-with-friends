@@ -1,17 +1,22 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import io from "socket.io-client";
+import { Form, Button } from "react-bootstrap";
+// import Chat from "./chat.js"
 
 export default function Game() {
   
   const [game, setGame] = useState(new Chess());
   const [history, setHistory] = useState([game.fen()]);
   const [socket, setSocket] = useState("");
+  const [id, setId] = useState("");
   // const [mounted, setMounted] = useState(false);
   
+  const [message, setMessage] = useState("");
+  const messagesRef = useRef(null);
 
   const navigate = useNavigate();
   const cookies = new Cookies();
@@ -39,16 +44,23 @@ export default function Game() {
       console.log('connected to socket');
     });
 
-    // socket.emit('createNewGame', newId);
-    // console.log(`created new game: ${newId}`)
-
     if (!gameId) {
       socket.emit('createNewGame', newId);
       console.log(`created new game: ${newId}`)
+      setId(newId)
     } else {
       socket.emit('createNewGame', gameId);
       console.log(`joined game: ${gameId}`)
+      setId(gameId)
     }
+
+    socket.on('game chat message', (msg) => {
+      const item = document.createElement('li');
+      item.textContent = msg;
+      console.log("adding message")
+      messagesRef.current.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+    });  
 
     return () => {
       socket.disconnect();
@@ -82,6 +94,16 @@ export default function Game() {
     return false;
   };
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (message.trim()) {
+        var chat = [user + ": " + message, id];
+        console.log("emitting message")
+        socket.emit('game chat message', chat);
+        setMessage("");
+    }
+  }
+
   function handleExit() {
     navigate('/home');
     console.log("leaving game")
@@ -98,10 +120,31 @@ export default function Game() {
           position={game.fen()}
           onPieceDrop={handlePieceDrop}
         />
+        <button onClick={() => handleExit()}>
+          Exit Game
+        </button>
       </div>
-      <button onClick={() => handleExit()}>
-        Exit Game
-      </button>
+      <div className="game-chat">
+        <ul id="chat-messages" ref={messagesRef}></ul>
+            <Form id="chat-form" noValidate onSubmit={handleSubmit}>
+                <Form.Group id="chat-input">
+                    <Form.Control
+                        id="chat-input"
+                        name="message"
+                        type="text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Enter message here..."
+                        autoComplete="false"
+                        required
+                    />
+                </Form.Group>
+                <Button id="chat-button" variant="primary" type="submit">
+                    Send
+                </Button>
+            </Form>
+        </div> 
+      
     </div>
   ) 
 };
