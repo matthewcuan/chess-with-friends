@@ -10,12 +10,14 @@ export default function Game() {
   const [game, setGame] = useState(new Chess());
   const [history, setHistory] = useState([game.fen()]);
   const [socket, setSocket] = useState("");
-  const newId = 1;
+  // const [mounted, setMounted] = useState(false);
+  
 
   const navigate = useNavigate();
   const cookies = new Cookies();
   const user = cookies.get("USER");
 
+  const newId = cookies.get("NEW_GAME_ID");
   const gameId = cookies.get("GAME_ID");
 
   useEffect(() => {
@@ -27,7 +29,9 @@ export default function Game() {
         }
     }
     checkLoggedIn();
+  }, [user, navigate]);
 
+  useEffect(() => {
     const socket = io("http://localhost:5000");
     setSocket(socket);
 
@@ -45,12 +49,11 @@ export default function Game() {
       socket.emit('createNewGame', gameId);
       console.log(`joined game: ${gameId}`)
     }
-    
 
     return () => {
       socket.disconnect();
     };
-  }, [navigate, user, gameId, newId]);
+  }, [newId, gameId])
   
   function handlePieceDrop(source, target) {
     let move = game.move({
@@ -81,7 +84,8 @@ export default function Game() {
 
   function handleExit() {
     navigate('/home');
-        console.log("leaving game")
+    console.log("leaving game")
+    cookies.remove("GAME_ID")
     if (socket) {
       socket.disconnect();
     }
