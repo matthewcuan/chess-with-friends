@@ -54,7 +54,7 @@ export default function Login() {
 
     return (
         <div className="onboard">
-            <h1>Multiplayer Chess</h1>
+            <h1>Chess with Friends</h1>
             <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="input" controlId="validationCustomUsername">
                     <Form.Label>Login: </Form.Label>

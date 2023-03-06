@@ -13,6 +13,7 @@ export default function Game() {
   const [history, setHistory] = useState([game.fen()]);
   const [socket, setSocket] = useState("");
   const [id, setId] = useState("");
+  const [board, setBoard] = useState(game.fen())
   // const [mounted, setMounted] = useState(false);
   
   const [message, setMessage] = useState("");
@@ -62,6 +63,14 @@ export default function Game() {
       window.scrollTo(0, document.body.scrollHeight);
     });  
 
+    socket.on('new move', (fen) => {
+      console.log('setting new board: ' + fen)
+      setBoard(fen);
+      // console.log("updating game")
+      // setGame(game);
+      
+    })
+
     return () => {
       socket.disconnect();
     };
@@ -85,7 +94,10 @@ export default function Game() {
       setGame(game);
       console.log(game.ascii());
       setHistory([...history, game.fen()]);
+      setBoard(game.fen())
       console.log(history)
+      console.log(board)
+      socket.emit('new move', game.fen());
       return true;
     }
 
@@ -117,7 +129,7 @@ export default function Game() {
     <div className="main">
       <div className="board">
         <Chessboard 
-          position={game.fen()}
+          position={board}
           onPieceDrop={handlePieceDrop}
         />
         <button onClick={() => handleExit()}>

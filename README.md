@@ -64,6 +64,7 @@ Two player chess MERN full stack web app played on separate or a single device.
     [ ] Second player joins game
         1. Board should be orientated correctly
         2. Display "Game started... white's move" in chat
+        3. No other players should be able to join/play (maybe implement a view mode later)
     [ ] Game begins
         1. White makes move -> fen string emitted
         2. Screens for both players should be updated to new positions 

@@ -51,9 +51,20 @@ MongoClient.connect(
         console.log('a user connected');
         
         socket.on("createNewGame", (gameId) => {
+            // if (socket.adapter.sids.size < 2) {
+            //     socket.join(gameId);
+            //     console.log(`a user joined room ${gameId}`);
+            // }
             socket.join(gameId);
             console.log(`a user joined room ${gameId}`);
+            console.log(socket.adapter.sids.size)
+
         });
+
+        socket.on('new move', (fen) => {
+            console.log("a new move was made");
+            io.emit('new move', fen);
+        })
 
         socket.on('chat message', (msg) => {
             console.log('message: ' + msg);

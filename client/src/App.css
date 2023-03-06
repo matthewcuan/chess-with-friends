@@ -52,7 +52,7 @@ button {
   flex-direction: column;
   width: 40%;
   position: absolute;
-  left: 5%;
+  left: 10%;
   justify-content: center;
   align-items: center;
 }
