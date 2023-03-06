@@ -56,9 +56,24 @@ MongoClient.connect(
             //     console.log(`a user joined room ${gameId}`);
             // }
             socket.join(gameId);
+
+            // assigning player to random piece color
+            
+            function blackOrWhite() {
+                const number = Math.floor(Math.random() * 9);
+                if (number > 4) {
+                    return "white";
+                } else {
+                    return "black";
+                }
+            }
+            const orientation = blackOrWhite();
+            console.log(orientation);
+            io.emit('board position', orientation);
+            
+            
             console.log(`a user joined room ${gameId}`);
             console.log(socket.adapter.sids.size)
-
         });
 
         socket.on('new move', (fen) => {

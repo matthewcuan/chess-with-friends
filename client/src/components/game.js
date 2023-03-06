@@ -13,7 +13,8 @@ export default function Game() {
   const [history, setHistory] = useState([game.fen()]);
   const [socket, setSocket] = useState("");
   const [id, setId] = useState("");
-  const [board, setBoard] = useState(game.fen())
+  const [board, setBoard] = useState(game.fen());
+  const [orientation, setOrientation] = useState("black");
   // const [mounted, setMounted] = useState(false);
   
   const [message, setMessage] = useState("");
@@ -66,15 +67,19 @@ export default function Game() {
     socket.on('new move', (fen) => {
       console.log('setting new board: ' + fen)
       setBoard(fen);
+      game.load(fen);
       // console.log("updating game")
       // setGame(game);
-      
+    })
+
+    socket.on('board position', (color) => {
+      setOrientation(color);
     })
 
     return () => {
       socket.disconnect();
     };
-  }, [newId, gameId])
+  }, [newId, gameId, game])
   
   function handlePieceDrop(source, target) {
     let move = game.move({
@@ -131,6 +136,7 @@ export default function Game() {
         <Chessboard 
           position={board}
           onPieceDrop={handlePieceDrop}
+          boardOrientation={orientation}
         />
         <button onClick={() => handleExit()}>
           Exit Game
