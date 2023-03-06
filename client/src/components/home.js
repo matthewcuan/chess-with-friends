@@ -92,6 +92,8 @@ export default function HomePage() {
             <button onClick={() => {
                 navigate('/');
                 cookies.remove("USER");
+                cookies.remove("GAME_ID");
+                cookies.remove("NEW_GAME_ID")
             }}>
                 Log Out
             </button>

@@ -58,7 +58,7 @@ Two player chess MERN full stack web app played on separate or a single device.
                 1. User returns to home/login page
 
 [ ] Implement actual multiplayer chess feature
-    [ ] Player starts game 
+    [X] Player starts game 
         1. Randomize which player is black and which is white and orient board in correct position for each player
         2. Display "Game initiated... waiting for other player" in chat
     [ ] Second player joins game

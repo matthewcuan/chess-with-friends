@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect, useRef, useMemo } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useNavigate } from "react-router-dom";
@@ -22,10 +22,10 @@ export default function Game() {
 
   const navigate = useNavigate();
   const cookies = new Cookies();
-  const user = cookies.get("USER");
+  const user = useMemo(() => new Cookies().get("USER"), []);
 
-  const newId = cookies.get("NEW_GAME_ID");
-  const gameId = cookies.get("GAME_ID");
+  const newId = useMemo(() => new Cookies().get("NEW_GAME_ID"), []);
+  const gameId = useMemo(() => new Cookies().get("GAME_ID"), []);
 
   useEffect(() => {
 
@@ -77,10 +77,16 @@ export default function Game() {
       setOrientation(orientation);
     })
 
+    socket.on('room full', (msg) => {
+      alert(msg);
+      console.log('room full')
+      navigate('/home');
+    })
+
     return () => {
       socket.disconnect();
     };
-  }, [newId, gameId, game, user])
+  }, [newId, gameId, game, user, navigate])
   
   function handlePieceDrop(source, target) {
     let move = game.move({
@@ -124,8 +130,8 @@ export default function Game() {
 
   function handleExit() {
     navigate('/home');
-    console.log("leaving game")
-    cookies.remove("GAME_ID")
+    console.log("leaving game");
+    cookies.remove("GAME_ID");
     if (socket) {
       socket.disconnect();
     }

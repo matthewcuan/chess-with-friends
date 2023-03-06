@@ -55,7 +55,7 @@ MongoClient.connect(
 .then(async client => {
     await UsersDAO.injectDB(client)
     app.listen(port, () => {
-        console.log(`listening on port ${port}`)
+        console.log(`mongo listening on port ${port}`)
     })
 })
 .then(() => {
@@ -68,24 +68,44 @@ MongoClient.connect(
             //     socket.join(gameId);
             //     console.log(`a user joined room ${gameId}`);
             // }
-            socket.join(game.id);
-            
-            // var room = io.sockets.adapter.rooms[gameId]
-            // console.log(room.length)
+            const room = socket.adapter.rooms.get(`${game.id}`); // get the room object
 
-            // assigning player to random piece color
+            // var occupany = parseInt(socket.adapter.sids.size);
+            if (!room || parseInt(room.size) < 2) {
+                socket.join(game.id);
+                // console.log(parseInt(room.length));
             
-            console.log(orientation);
-            io.to(socket.id).emit('board position', orientation);
-            if (orientation === "white") {
-                orientation = "black";
+                // var room = io.sockets.adapter.rooms[gameId]
+                // console.log(room.length)
+
+                // assigning player to random piece color
+                
+                console.log(orientation);
+                if (parseInt(socket.adapter.rooms.get(`${game.id}`).size) === 1) {
+                    io.to(socket.id).emit('board position', orientation);
+                } else {
+                    if (orientation === "white") {
+                        orientation = "black";
+                    } else {
+                        orientation = "white";
+                    }
+                    io.to(socket.id).emit('board position', orientation);
+                }
+                
+                
+                
+                
+                console.log(`${game.user} joined room ${game.id}`);
             } else {
-                orientation = "white";
+                console.log("room full");
+                io.to(socket.id).emit('room full', "This game is full. Please try another room!")
+                return ;
             }
+
+            console.log(socket.adapter.rooms);
+            console.log(socket.adapter.rooms.get(`${game.id}`).size);
+
             
-            
-            console.log(`${game.user} joined room ${game.id}`);
-            console.log(socket.adapter.sids.size)
         });
 
         socket.on('new move', (fen) => {
@@ -100,6 +120,8 @@ MongoClient.connect(
 
         socket.on('disconnect', () => {
             console.log('user disconnected');
+            console.log(socket.adapter.sids.size);
+
         });
 
         socket.on('game chat message', (msg) => {
@@ -114,7 +136,7 @@ MongoClient.connect(
     app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
     
     server.listen(5000, () => {
-        console.log("Server listening on port 5000");
+        console.log("socket listening on port 5000");
     });
 });
 
