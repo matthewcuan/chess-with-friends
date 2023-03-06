@@ -26,6 +26,18 @@ const io = new Server(server, {
     }
 });
 
+function blackOrWhite() {
+    const number = Math.floor(Math.random() * 9);
+    if (number > 4) {
+        return "white";
+    } else {
+        return "black";
+    }
+}
+
+var orientation = blackOrWhite();
+
+
 app.use(cors());
 app.use(express.json());
 
@@ -50,29 +62,29 @@ MongoClient.connect(
     io.on("connection", (socket) => {
         console.log('a user connected');
         
-        socket.on("createNewGame", (gameId) => {
+        
+        socket.on("createNewGame", (game) => {
             // if (socket.adapter.sids.size < 2) {
             //     socket.join(gameId);
             //     console.log(`a user joined room ${gameId}`);
             // }
-            socket.join(gameId);
+            socket.join(game.id);
+            
+            // var room = io.sockets.adapter.rooms[gameId]
+            // console.log(room.length)
 
             // assigning player to random piece color
             
-            function blackOrWhite() {
-                const number = Math.floor(Math.random() * 9);
-                if (number > 4) {
-                    return "white";
-                } else {
-                    return "black";
-                }
-            }
-            const orientation = blackOrWhite();
             console.log(orientation);
-            io.emit('board position', orientation);
+            io.to(socket.id).emit('board position', orientation);
+            if (orientation === "white") {
+                orientation = "black";
+            } else {
+                orientation = "white";
+            }
             
             
-            console.log(`a user joined room ${gameId}`);
+            console.log(`${game.user} joined room ${game.id}`);
             console.log(socket.adapter.sids.size)
         });
 

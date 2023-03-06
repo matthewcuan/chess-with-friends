@@ -47,11 +47,11 @@ export default function Game() {
     });
 
     if (!gameId) {
-      socket.emit('createNewGame', newId);
+      socket.emit('createNewGame', {id:newId, user:user});
       console.log(`created new game: ${newId}`)
       setId(newId)
     } else {
-      socket.emit('createNewGame', gameId);
+      socket.emit('createNewGame', {id:gameId, user:user});
       console.log(`joined game: ${gameId}`)
       setId(gameId)
     }
@@ -72,14 +72,15 @@ export default function Game() {
       // setGame(game);
     })
 
-    socket.on('board position', (color) => {
-      setOrientation(color);
+    socket.on('board position', (orientation) => {
+      console.log(orientation);
+      setOrientation(orientation);
     })
 
     return () => {
       socket.disconnect();
     };
-  }, [newId, gameId, game])
+  }, [newId, gameId, game, user])
   
   function handlePieceDrop(source, target) {
     let move = game.move({
