@@ -130,8 +130,8 @@ MongoClient.connect(
         })
 
         socket.on('message', (msg) => {
-            console.log('message: ' + msg.chat);
-            io.to(msg.gameId).emit('message', msg.chat);
+            console.log('message: ' + msg);
+            io.to(gameId).emit('message', msg);
         });
       });
 

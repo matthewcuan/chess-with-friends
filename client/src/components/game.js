@@ -103,7 +103,7 @@ export default function Game() {
 
     if (game.isGameOver()) {
       // const winner = (game.turn() === 'w' ? 'White' : 'Black');
-      socket.emit('message', user + "wins!");
+      socket.emit('message', user + " wins!");
       game.reset();
     }
 
