@@ -14,16 +14,32 @@ export default class GamesDAO {
         }
       }
 
-    static async addGame(user, game) {
-        
-    }
-
     static async getPublicGames() {
 
     }
 
-    static async getGamesByUserID(user, game) {
+    static async getUserGames(user, game) {
 
     }
+
+    static async addGame(user, game) {
+        // *attributes* 
+        // saved: [public, private]
+        // players: user ids of both players
+        // history: array of fens
+
+    }
+    
+    static async getGame(user, game) {
+        
+    }
+    static async updateGame(user, game) {
+        
+    }
+
+    static async deleteGame(user, game) {
+        
+    }
+
 
 }

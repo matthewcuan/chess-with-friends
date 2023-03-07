@@ -57,17 +57,33 @@ Two player chess MERN full stack web app played on separate or a single device.
             [X] Log out
                 1. User returns to home/login page
 
-[ ] Implement actual multiplayer chess feature
+[X] Implement actual multiplayer chess feature
     [X] Player starts game 
         1. Randomize which player is black and which is white and orient board in correct position for each player
         2. Display "Game initiated... waiting for other player" in chat
-    [ ] Second player joins game
+    [X] Second player joins game
         1. Board should be orientated correctly
         2. Display "Game started... white's move" in chat
         3. No other players should be able to join/play (maybe implement a view mode later)
-    [ ] Game begins
+    [X] Game begins
         1. White makes move -> fen string emitted
         2. Screens for both players should be updated to new positions 
     [ ] Game ends
         1. Display "${winner} won!"
         2. Display options to rematch in same room or exit to home page
+
+[ ] Implement gave saves. 
+    1. Game ends and user is presented with 3 save options:
+        [ ] Public save
+            - savePublicGame -> game saved to game db with public tag, anyone can access it from the login page
+        [ ] Private save
+            - savePrivateGame -> game saved to db with private tag, only player can access when logged in
+        [ ] Don't save
+            - the game is not saved and the user is presented with the below options 
+    2. After choosing one of the above options:
+        [ ] New game
+            - board is reset
+        [ ] Exit room
+            - return to home page
+
+

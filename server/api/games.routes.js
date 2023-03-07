@@ -4,11 +4,12 @@ import GamesController from "./games.controller";
 const router = express.Router()
 
 // all possible routes for movie.html
-router.route("/movie/:id").get(ReviewCtrl.apiGetReviews)
-router.route("/new").post(ReviewCtrl.apiPostReview)
-router.route("/:id")
-  .get(ReviewCtrl.apiGetReview)
-  .put(ReviewCtrl.apiUpdateReview)
-  .delete(ReviewCtrl.apiDeleteReview)
+router.route("/public-games").get(GamesController.apiGetPublicGames)
+router.route("/:user").get(GamesController.apiGetUserGames)
+router.route("/save").post(GamesController.apiPostGame)
+router.route("/game/:id")
+  .get(GamesController.apiGetGame)
+  .put(GamesController.apiUpdateGame)
+  .delete(GamesController.apiDeleteGame)
   
 export default router
