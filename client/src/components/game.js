@@ -56,13 +56,13 @@ export default function Game() {
       setId(gameId)
     }
 
-    socket.on('game chat message', (msg) => {
+    socket.on('message', (msg) => {
       const item = document.createElement('li');
       item.textContent = msg;
       console.log("adding message")
       messagesRef.current.appendChild(item);
       window.scrollTo(0, document.body.scrollHeight);
-    });  
+    }); 
 
     socket.on('new move', (fen) => {
       console.log('setting new board: ' + fen)
@@ -121,20 +121,19 @@ export default function Game() {
   function handleSubmit(event) {
     event.preventDefault();
     if (message.trim()) {
-        var chat = [user + ": " + message, id];
+        var msg = {chat: user + ": " + message, gameId: id};
         console.log("emitting message")
-        socket.emit('game chat message', chat);
+        console.log(msg);
+        socket.emit('message', msg);
         setMessage("");
     }
   }
 
   function handleExit() {
-    navigate('/home');
     console.log("leaving game");
     cookies.remove("GAME_ID");
-    if (socket) {
-      socket.disconnect();
-    }
+    console.log(user + " left")
+    navigate('/home');
   };
 
   return (

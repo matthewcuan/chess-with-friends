@@ -36,6 +36,7 @@ function blackOrWhite() {
 }
 
 var orientation = blackOrWhite();
+var user = "";
 
 
 app.use(cors());
@@ -62,27 +63,26 @@ MongoClient.connect(
     io.on("connection", (socket) => {
         console.log('a user connected');
         
-        
         socket.on("createNewGame", (game) => {
             // if (socket.adapter.sids.size < 2) {
             //     socket.join(gameId);
             //     console.log(`a user joined room ${gameId}`);
             // }
-            const room = socket.adapter.rooms.get(`${game.id}`); // get the room object
+            var room = socket.adapter.rooms.get(`${game.id}`); // get the room object
+            user = game.user;
 
-            // var occupany = parseInt(socket.adapter.sids.size);
-            if (!room || parseInt(room.size) < 2) {
+            if (!room) {
                 socket.join(game.id);
-                // console.log(parseInt(room.length));
-            
-                // var room = io.sockets.adapter.rooms[gameId]
-                // console.log(room.length)
-
-                // assigning player to random piece color
+                room = socket.adapter.rooms.get(`${game.id}`);
+            }
+            // var occupany = parseInt(socket.adapter.sids.size);
+            if (parseInt(room.size) < 2) {
+                socket.join(game.id);
                 
                 console.log(orientation);
-                if (parseInt(socket.adapter.rooms.get(`${game.id}`).size) === 1) {
+                if (parseInt(room.size) === 1) {
                     io.to(socket.id).emit('board position', orientation);
+                    io.to(socket.id).emit('message', "Game initiated... waiting for other player")
                 } else {
                     if (orientation === "white") {
                         orientation = "black";
@@ -92,9 +92,6 @@ MongoClient.connect(
                     io.to(socket.id).emit('board position', orientation);
                 }
                 
-                
-                
-                
                 console.log(`${game.user} joined room ${game.id}`);
             } else {
                 console.log("room full");
@@ -102,10 +99,8 @@ MongoClient.connect(
                 return ;
             }
 
-            console.log(socket.adapter.rooms);
             console.log(socket.adapter.rooms.get(`${game.id}`).size);
 
-            
         });
 
         socket.on('new move', (fen) => {
@@ -119,17 +114,19 @@ MongoClient.connect(
         });
 
         socket.on('disconnect', () => {
+            io.to(socket.id).emit('msg', "Player left")
             console.log('user disconnected');
             console.log(socket.adapter.sids.size);
-
         });
 
-        socket.on('game chat message', (msg) => {
-            console.log('message: ' + msg[0]);
-            io.to(`${msg[1]}`).emit('game chat message', msg[0]);
-        }
-            
-        )
+        socket.on('exit message', (msg) => {
+            io.to(socket.id).emit('message', msg);
+        })
+
+        socket.on('message', (msg) => {
+            console.log('message: ' + msg.chat);
+            io.to(msg.gameId).emit('message', msg.chat);
+        });
       });
 
     app.use("/api/v1/users", users);
