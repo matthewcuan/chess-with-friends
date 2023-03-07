@@ -37,6 +37,7 @@ function blackOrWhite() {
 
 var orientation = blackOrWhite();
 var user = "";
+var gameId = "";
 
 
 app.use(cors());
@@ -70,26 +71,30 @@ MongoClient.connect(
             // }
             var room = socket.adapter.rooms.get(`${game.id}`); // get the room object
             user = game.user;
+            gameId = game.id;
 
             if (!room) {
                 socket.join(game.id);
+                io.to(socket.id).emit('board position', orientation);
+                io.to(socket.id).emit('message', "Game initiated... waiting for other player");
                 room = socket.adapter.rooms.get(`${game.id}`);
             }
             // var occupany = parseInt(socket.adapter.sids.size);
             if (parseInt(room.size) < 2) {
                 socket.join(game.id);
-                
                 console.log(orientation);
+                console.log(room.size);
                 if (parseInt(room.size) === 1) {
-                    io.to(socket.id).emit('board position', orientation);
-                    io.to(socket.id).emit('message', "Game initiated... waiting for other player")
-                } else {
+                    console.log("changing orientation")
                     if (orientation === "white") {
                         orientation = "black";
                     } else {
                         orientation = "white";
                     }
+                } else {                    
                     io.to(socket.id).emit('board position', orientation);
+                    io.to(socket.id).emit('message', "Joined! Game started... white's move");
+                    socket.broadcast.to(game.id).emit('message', game.user + " joined! Game started... white's move")
                 }
                 
                 console.log(`${game.user} joined room ${game.id}`);
@@ -114,7 +119,8 @@ MongoClient.connect(
         });
 
         socket.on('disconnect', () => {
-            io.to(socket.id).emit('msg', "Player left")
+            socket.broadcast.to(gameId).emit('message', "Opponent left. You won by abandonment.");
+            socket.broadcast.to(gameId).emit('end game');
             console.log('user disconnected');
             console.log(socket.adapter.sids.size);
         });

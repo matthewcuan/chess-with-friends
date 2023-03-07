@@ -39,7 +39,9 @@ export default function Game() {
   }, [user, navigate]);
 
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    const socket = io("http://localhost:5000", {
+      user: user
+    });
     setSocket(socket);
 
     socket.on('connect', () => {
@@ -83,6 +85,10 @@ export default function Game() {
       navigate('/home');
     })
 
+    socket.on('end game', () => {
+      game.reset();
+    })
+
     return () => {
       socket.disconnect();
     };
@@ -96,8 +102,8 @@ export default function Game() {
     })
 
     if (game.isGameOver()) {
-      const winner = (game.turn() === 'w' ? 'White' : 'Black');
-      alert(`${winner} wins!`);
+      // const winner = (game.turn() === 'w' ? 'White' : 'Black');
+      socket.emit('message', user + "wins!");
       game.reset();
     }
 
