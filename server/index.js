@@ -2,9 +2,11 @@ import dotenv from 'dotenv'
 // import app from "./server.js"
 import mongodb from "mongodb"
 import UsersDAO from "./dao/usersDAO.js"
+import GamesDAO from "./dao/gamesDAO.js"
 import express from "express"
 import cors from "cors"
 import users from "./api/users.routes.js"
+import games from "./api/games.routes.js"
 import { createServer } from "http";
 import { Server } from "socket.io";
 
@@ -56,6 +58,7 @@ MongoClient.connect(
 })
 .then(async client => {
     await UsersDAO.injectDB(client)
+    await GamesDAO.injectDB(client)
     app.listen(port, () => {
         console.log(`mongo listening on port ${port}`)
     })
@@ -136,6 +139,7 @@ MongoClient.connect(
       });
 
     app.use("/api/v1/users", users);
+    app.use("/api/v1/games", games);
     app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
     
     server.listen(5000, () => {

@@ -1,4 +1,4 @@
-import GamesDAO from "../dao/gamesDAO";
+import GamesDAO from "../dao/gamesDAO.js";
 
 export default class GamesController {
     // gets all publicly saved games (public tag)
@@ -16,7 +16,22 @@ export default class GamesController {
     // posts/saves recently played game
     // option for public or private save
     static async apiPostGame(req, res, next) {
-
+        try {
+            const title = req.body.title
+            const type = req.body.type
+            const players = req.body.players
+            const history = req.body.history
+            console.log('title', title)
+            const reviewResponse = await GamesDAO.addGame(
+                title,
+                type,
+                players,
+                history
+            )
+            res.json({ status: "success" })     
+        } catch (e) {
+            res.status(500).json({ error: e.message })
+        } 
     }
     
     // gets a single game
