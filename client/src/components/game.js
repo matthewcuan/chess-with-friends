@@ -58,6 +58,8 @@ export default function Game() {
       setId(gameId)
     }
 
+    
+
     socket.on('message', (msg) => {
       const item = document.createElement('li');
       item.textContent = msg;
@@ -89,6 +91,22 @@ export default function Game() {
       game.reset();
     })
 
+    socket.on('save options', () => {
+      const msg = document.createElement('li');
+      msg.textContent = "Choose a save option: "
+      const public_save = document.createElement('button');
+      public_save.textContent = 'Public Save';
+      msg.appendChild(public_save);
+      const private_save = document.createElement('button');
+      private_save.textContent = 'Private Save';
+      msg.appendChild(private_save);
+      const no_save = document.createElement('button');
+      no_save.textContent = "Don't Save";
+      msg.appendChild(no_save);
+      messagesRef.current.appendChild(msg);
+      window.scrollTo(0, document.body.scrollHeight);
+    })
+
     return () => {
       socket.disconnect();
     };
@@ -103,8 +121,7 @@ export default function Game() {
 
     if (game.isGameOver()) {
       // const winner = (game.turn() === 'w' ? 'White' : 'Black');
-      socket.emit('message', user + " wins!");
-      game.reset();
+      socket.emit('game end', {winner: "You win!", loser: user + " wins!"} );
     }
 
     // legal move

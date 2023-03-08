@@ -14,7 +14,7 @@ export default function HomePage() {
     const navigate = useNavigate();
 
     const [validated, setValidated] = useState(false);
-    const [newGame, setNewGAme] = useState("");
+    const [newGame, setNewGame] = useState("");
     const [gameId, setGameId] = useState("");
 
     const cookies = new Cookies();
@@ -63,7 +63,7 @@ export default function HomePage() {
                         name="new-game"
                         type="text"
                         value={newGame}
-                        onChange={(e) => setNewGAme(e.target.value)}
+                        onChange={(e) => setNewGame(e.target.value)}
                         placeholder="Enter game id here"
                         autoComplete="false"
                         required

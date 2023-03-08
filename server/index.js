@@ -124,12 +124,21 @@ MongoClient.connect(
         socket.on('disconnect', () => {
             socket.broadcast.to(gameId).emit('message', "Opponent left. You won by abandonment.");
             socket.broadcast.to(gameId).emit('end game');
+            io.to(gameId).emit('save options');
             console.log('user disconnected');
             console.log(socket.adapter.sids.size);
+            io.to(gameId).emit('end game');
         });
 
         socket.on('exit message', (msg) => {
             io.to(socket.id).emit('message', msg);
+        })
+
+        socket.on('game end', (msgs) => {
+            io.to(socket.id).emit('message', msgs.winner);
+            socket.broadcast.to(gameId).emit('message', msgs.loser)
+            io.to(gameId).emit('save options');
+            io.to(gameId).emit('end game');
         })
 
         socket.on('message', (msg) => {
