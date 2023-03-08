@@ -25,3 +25,6 @@
 ├── package-lock.json
 └── .gitignore
 
+## Terminal route test
+
+curl -X POST http://localhost:8000/api/v1/games/save -H "Content-Type: application/json" -d '{"title": "test", "type": "public", "players": "player 1, player 2", "history": "history"}

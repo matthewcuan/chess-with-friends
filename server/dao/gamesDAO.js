@@ -1,6 +1,5 @@
 import mongodb from "mongodb";
-
-const ObjectID = mongodb.ObjectID;
+const objectID = (id) => new mongodb.ObjectId(id);
 
 let games
 // TODO: addGame, getPublicGames, getGamesByUserID
@@ -17,15 +16,16 @@ export default class GamesDAO {
         }
       }
 
-    static async getPublicGames() {ß
+    static async getPublicGames() {
       try {
-        console.log("attempting to get public games")
-        return await users.find({ type: "public" })
+        console.log("attempting to get public games");
+        const cursor = games.find({ type: "public" });
+        return await cursor.toArray();
       } catch (e) {
         console.log("user not found")
         console.error(`Unable to find user: ${e}`)
         return { error: e }
-      }ß
+      }
     }
 
     static async getUserGames(user, game) {
@@ -53,9 +53,27 @@ export default class GamesDAO {
 
     }
     
-    static async getGame(user, game) {
-        
+    static async getGame(id) {
+      try {
+        console.log("attempting to get game")
+        return await games.findOne({ _id: objectID(`${id}`) })
+      } catch (e) {
+        console.log("game not found")
+        console.error(`Unable to find game: ${e}`)
+        return { error: e }
+      }
     }
+
+    // static async getGame(titleId) {
+    //   try {
+    //     console.log("getting")
+    //     return await games.findOne({ title: titleId })
+    //   } catch (e) {
+    //     console.error(`Unable to get review: ${e}`)
+    //     return { error: e }
+    //   }
+    // }
+
     static async updateGame(user, game) {
         
     }
