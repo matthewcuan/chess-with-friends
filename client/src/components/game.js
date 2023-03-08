@@ -115,6 +115,7 @@ export default function Game() {
       setBoard(game.fen())
       console.log(history)
       console.log(board)
+      console.log(game.pgn())
       socket.emit('new move', game.fen());
       return true;
     }
