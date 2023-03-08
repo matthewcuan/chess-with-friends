@@ -141,9 +141,15 @@ MongoClient.connect(
             io.to(gameId).emit('end game');
         })
 
+        socket.on('restart game', () => {
+            console.log("restarting")
+            io.to(gameId).emit('message', "New game started.");
+            io.to(gameId).emit('end game');
+        })
+
         socket.on('message', (msg) => {
-            console.log('message: ' + msg);
-            io.to(gameId).emit('message', msg);
+            console.log('message: ' + msg.chat + " to " + msg.gameId);
+            io.to(msg.gameId).emit('message', msg.chat);
         });
       });
 

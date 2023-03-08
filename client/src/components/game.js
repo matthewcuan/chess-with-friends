@@ -11,7 +11,7 @@ export default function Game() {
   
   const [game, setGame] = useState(new Chess());
   const [history, setHistory] = useState([game.fen()]);
-  const [socket, setSocket] = useState("");
+  const [socket, setSocket] = useState(null);
   const [id, setId] = useState("");
   const [board, setBoard] = useState(game.fen());
   const [orientation, setOrientation] = useState("black");
@@ -93,15 +93,14 @@ export default function Game() {
 
     socket.on('save options', () => {
       const msg = document.createElement('li');
-      msg.textContent = "Choose a save option: "
-      const public_save = document.createElement('button');
-      public_save.textContent = 'Public Save';
-      msg.appendChild(public_save);
-      const private_save = document.createElement('button');
-      private_save.textContent = 'Private Save';
-      msg.appendChild(private_save);
+      msg.textContent = "Would you like to save this game?"
+      const save = document.createElement('button');
+      save.onclick = () => handleSave();
+      save.textContent = 'Yes';
+      msg.appendChild(save);
       const no_save = document.createElement('button');
-      no_save.textContent = "Don't Save";
+      no_save.textContent = 'No';
+      no_save.onclick = () => handleExit();
       msg.appendChild(no_save);
       messagesRef.current.appendChild(msg);
       window.scrollTo(0, document.body.scrollHeight);
@@ -153,12 +152,53 @@ export default function Game() {
     }
   }
 
-  function handleExit() {
+  function handleReturn() {
     console.log("leaving game");
     cookies.remove("GAME_ID");
     console.log(user + " left")
     navigate('/home');
   };
+
+  function handleExit() {
+    const msg = document.createElement('li');
+    msg.innerText = "Choose an option: "
+    const new_game = document.createElement('button');
+    new_game.textContent = 'New Game';
+    new_game.onclick = (event, socket) => handleRestart(event, socket);
+    msg.appendChild(new_game);
+    const exit_game = document.createElement('button');
+    exit_game.textContent = 'Exit Game';
+    exit_game.onclick = () => handleReturn();
+    msg.appendChild(exit_game);
+    messagesRef.current.appendChild(msg);
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function handleRestart(event, socket) {
+    event.preventDefault();
+    if (socket) {
+      console.log("restarting")
+      socket.emit('message', "new game started");
+    } else {
+      game.reset()
+      socket.emit('message', "new game started");
+    }
+    
+  }
+
+  function handleSave() {
+    console.log("showing options")
+    const msg = document.createElement('li');
+    msg.innerText = "Choose a save option: "
+    const public_save = document.createElement('button');
+    public_save.textContent = 'Public Save';
+    msg.appendChild(public_save);
+    const private_save = document.createElement('button');
+    private_save.textContent = 'Private Save';
+    msg.appendChild(private_save);
+    messagesRef.current.appendChild(msg);
+    window.scrollTo(0, document.body.scrollHeight);
+  }
 
   return (
     <div className="main">
@@ -168,13 +208,13 @@ export default function Game() {
           onPieceDrop={handlePieceDrop}
           boardOrientation={orientation}
         />
-        <button onClick={() => handleExit()}>
+        <button onClick={() => handleReturn()}>
           Exit Game
         </button>
       </div>
       <div className="game-chat">
         <ul id="chat-messages" ref={messagesRef}></ul>
-            <Form id="chat-form" noValidate onSubmit={handleSubmit}>
+            <Form id="chat-form" noValidate onSubmit={handleSubmit} autoComplete="off">
                 <Form.Group id="chat-input">
                     <Form.Control
                         id="chat-input"
@@ -183,7 +223,6 @@ export default function Game() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Enter message here..."
-                        autoComplete="false"
                         required
                     />
                 </Form.Group>
