@@ -20,7 +20,19 @@ export default class GamesController {
     // gets all users and publicly saved games
     // to be displayed on user home page
     static async apiGetUserGames(req, res, next) {
-
+        try {
+            let id = req.params.user || {}
+            let games = await GamesDAO.getUserGames(id)
+            console.log(id)
+            if (!games) {
+              res.status(404).json({ error: "Not found" })
+              return
+            }
+            res.json(games)
+        } catch (e) {
+            console.log(`api, ${e}`)
+            res.status(500).json({ error: e })
+        }
     }
     
     // posts/saves recently played game
@@ -64,12 +76,41 @@ export default class GamesController {
     
     // updates game description
     static async apiUpdateGame(req, res, next) {
-
+        try {
+            const game = req.params.id
+            const title = req.body.title
+      
+            const gameResponse = await GamesDAO.updateGame(
+              game,
+              title
+            )
+      
+            var { error } = gameResponse
+            if (error) {
+              res.status(400).json({ error })
+            }
+      
+            if (gameResponse.modifiedCount === 0) {
+              throw new Error(
+                "unable to update game",
+              )
+            }
+      
+            res.json({ status: "success" })
+          } catch (e) {
+            res.status(500).json({ error: e.message })
+          }
     }
 
     // deletes game from db
     static async apiDeleteGame(req, res, next) {
-
+        try {
+            const gameId = req.params.id
+            const gameResponse = await GamesDAO.deleteGame(gameId)
+            res.json({ status: "success" })
+          } catch (e) {
+            res.status(500).json({ error: e.message })
+          }
     }
 
 }

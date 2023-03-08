@@ -28,8 +28,16 @@ export default class GamesDAO {
       }
     }
 
-    static async getUserGames(user, game) {
-
+    static async getUserGames(player) {
+      try {
+        console.log("attempting to get user games");
+        const cursor = games.find({ players: player });
+        return await cursor.toArray();
+      } catch (e) {
+        console.log("games not found")
+        console.error(`Unable to find games: ${e}`)
+        return { error: e }
+      }
     }
 
     static async addGame(title, type, players, history) {
@@ -74,12 +82,30 @@ export default class GamesDAO {
     //   }
     // }
 
-    static async updateGame(user, game) {
-        
+    static async updateGame(game, title) {
+      try {
+        const updateResponse = await games.updateOne(
+          { _id: objectID(game) },
+          { $set: { title: title } }
+        )
+        return updateResponse
+      } catch (e) {
+        console.error(`Unable to update game: ${e}`)
+        return { error: e }
+      }
     }
 
-    static async deleteGame(user, game) {
-        
+    static async deleteGame(gameId) {
+      try {
+        const deleteGame = await games.deleteOne({
+          _id: objectID(gameId)
+        })
+  
+        return deleteGame
+      } catch (e) {
+        console.error(`Unable to delete game: ${e}`)
+        return { error: e }
+      }
     }
 
 

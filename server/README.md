@@ -27,4 +27,10 @@
 
 ## Terminal route test
 
-curl -X POST http://localhost:8000/api/v1/games/save -H "Content-Type: application/json" -d '{"title": "test", "type": "public", "players": "player 1, player 2", "history": "history"}
+curl -X POST http://localhost:8000/api/v1/games/save -H "Content-Type: application/json" -d '{"title": "test", "type": "public", "player1": "player1", "player2": "player 2", "history": "history"}'
+
+curl -X PUT http://localhost:8000/api/v1/games/game/6407c78f89265e6d5c3f62bf -H "Content-Type: application/json" -d '{"title": "update test"}'
+
+curl -X DELETE http://localhost:8000/api/v1/games/game/6407c78f89265e6d5c3f62bf
+
+curl -X GET http://localhost:8000/api/v1/games/player1
