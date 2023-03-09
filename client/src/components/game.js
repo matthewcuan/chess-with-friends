@@ -12,7 +12,7 @@ import { GAMES_API_URL } from "../utils/constants";
 export default function Game() {
   
   const [game, setGame] = useState(new Chess());
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([game.fen()]);
   const [socket, setSocket] = useState(null);
   const [id, setId] = useState("");
   const [board, setBoard] = useState(game.fen());
@@ -60,8 +60,6 @@ export default function Game() {
       setId(gameId)
     }
 
-    
-
     socket.on('message', (msg) => {
       const item = document.createElement('li');
       item.textContent = msg;
@@ -74,11 +72,13 @@ export default function Game() {
       console.log('setting new board: ' + fen)
       setBoard(fen);
       game.load(fen);
+      // console.log(fen)
       // history.push(fen)
-      console.log(game.fen())
-      // setHistory([...history, fen]);
-      console.log(game.pgn);
-      console.log(game.history())
+      console.log("game.fen():" + game.fen())
+      console.log("history:" + history)
+      setHistory(prevHistory => [...prevHistory, game.fen()]);
+      // console.log(game.pgn);
+      // console.log(game.history())
       console.log("new history")
       console.log(history)
       // console.log("updating game")
@@ -118,8 +118,10 @@ export default function Game() {
     return () => {
       socket.disconnect();
     };
-  }, [newId, gameId, game, user, navigate])
+  }, [])
   
+  // newId, gameId, game, user, navigate
+
   function handlePieceDrop(source, target) {
     let move = game.move({
       from: source,
@@ -136,10 +138,8 @@ export default function Game() {
     if (move) {
       setGame(game);
       console.log(game.ascii());
-      setBoard(game.fen())
       // console.log(history)
       console.log(board)
-      setHistory(prevHistory => [...prevHistory, game.fen()]);
       socket.emit('new move', game.fen());
       return true;
     }
