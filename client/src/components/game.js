@@ -7,6 +7,7 @@ import io from "socket.io-client";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { GAMES_API_URL } from "../utils/constants";
+// import { socket } from "../connection/socket"
 // import { history } from "../utils/context";
 
 export default function Game() {
@@ -38,7 +39,7 @@ export default function Game() {
         }
     }
     checkLoggedIn();
-  }, [user, navigate]);
+  }, []);
 
   useEffect(() => {
     const socket = io("http://localhost:5000", {
