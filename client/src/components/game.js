@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import io from "socket.io-client";
 import { Form, Button } from "react-bootstrap";
-// import Chat from "./chat.js"
+import axios from "axios";
+import { GAMES_API_URL } from "../utils/constants";
+// import { history } from "../utils/context";
 
 export default function Game() {
   
   const [game, setGame] = useState(new Chess());
-  const [history, setHistory] = useState([game.fen()]);
+  const [history, setHistory] = useState([]);
   const [socket, setSocket] = useState(null);
   const [id, setId] = useState("");
   const [board, setBoard] = useState(game.fen());
@@ -72,6 +74,13 @@ export default function Game() {
       console.log('setting new board: ' + fen)
       setBoard(fen);
       game.load(fen);
+      // history.push(fen)
+      console.log(game.fen())
+      // setHistory([...history, fen]);
+      console.log(game.pgn);
+      console.log(game.history())
+      console.log("new history")
+      console.log(history)
       // console.log("updating game")
       // setGame(game);
     })
@@ -95,7 +104,7 @@ export default function Game() {
       const msg = document.createElement('li');
       msg.textContent = "Would you like to save this game?"
       const save = document.createElement('button');
-      save.onclick = () => handleSave();
+      save.onclick = () => handleSaveOptions();
       save.textContent = 'Yes';
       msg.appendChild(save);
       const no_save = document.createElement('button');
@@ -127,11 +136,10 @@ export default function Game() {
     if (move) {
       setGame(game);
       console.log(game.ascii());
-      setHistory([...history, game.fen()]);
       setBoard(game.fen())
-      console.log(history)
+      // console.log(history)
       console.log(board)
-      console.log(game.pgn())
+      setHistory(prevHistory => [...prevHistory, game.fen()]);
       socket.emit('new move', game.fen());
       return true;
     }
@@ -174,6 +182,7 @@ export default function Game() {
     window.scrollTo(0, document.body.scrollHeight);
   }
 
+  // TODO: fix this
   function handleRestart(event, socket) {
     event.preventDefault();
     if (socket) {
@@ -182,22 +191,53 @@ export default function Game() {
     } else {
       game.reset()
       socket.emit('message', "new game started");
-    }
-    
+    }  
   }
 
-  function handleSave() {
+  function handleSaveOptions() {
     console.log("showing options")
     const msg = document.createElement('li');
     msg.innerText = "Choose a save option: "
     const public_save = document.createElement('button');
     public_save.textContent = 'Public Save';
+    public_save.onclick = () => handleSave("public")
     msg.appendChild(public_save);
     const private_save = document.createElement('button');
     private_save.textContent = 'Private Save';
+    private_save.onclick = () => handleSave("private")
     msg.appendChild(private_save);
     messagesRef.current.appendChild(msg);
     window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function handleSave(type) {
+
+    const configuration = {
+      method: "post",
+      url: GAMES_API_URL + "save",
+      data: {
+        "title": user,
+        "type":  type,
+        "players": [user],
+        "history": history
+      }
+    };
+
+    axios(configuration)
+    .then((response) => {
+      console.log(response.data);
+      console.log("game saved");
+      const item = document.createElement('li');
+      item.textContent = "Game successfully saved.";
+      messagesRef.current.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+    })
+    // if user does not exist
+    .catch((error) => {
+        alert("Game could not be saved.")
+        console.log("error posting game to db")
+        return ;
+    }) 
   }
 
   return (
