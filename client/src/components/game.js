@@ -13,7 +13,7 @@ import { GAMES_API_URL } from "../utils/constants";
 export default function Game() {
   
   const [game, setGame] = useState(new Chess());
-  const [history, setHistory] = useState([game.fen()]);
+  const [history, setHistory] = useState([]);
   const [socket, setSocket] = useState(null);
   const [id, setId] = useState("");
   const [board, setBoard] = useState(game.fen());
@@ -73,15 +73,18 @@ export default function Game() {
       console.log('setting new board: ' + fen)
       setBoard(fen);
       game.load(fen);
+      console.log(history);
       // console.log(fen)
       // history.push(fen)
-      console.log("game.fen():" + game.fen())
-      console.log("history:" + history)
-      setHistory(prevHistory => [...prevHistory, game.fen()]);
+      // console.log("game.fen():" + game.fen())
+      // console.log("history:" + history)
+      // console.log([...history, fen])
+      // setHistory([...history, fen]);
+      // setHistory(prevHistory => [...prevHistory, game.fen()]);
       // console.log(game.pgn);
       // console.log(game.history())
-      console.log("new history")
-      console.log(history)
+      // console.log("new history")
+      // console.log(history)
       // console.log("updating game")
       // setGame(game);
     })
@@ -121,6 +124,13 @@ export default function Game() {
     };
   }, [])
   
+
+  useEffect(() => {
+    console.log('setting new board: ' + board)
+    game.load(board);
+    setHistory(prevHistory => [...prevHistory, game.fen()]);
+    console.log(history);
+  }, [board])
   // newId, gameId, game, user, navigate
 
   function handlePieceDrop(source, target) {
@@ -212,7 +222,7 @@ export default function Game() {
   }
 
   function handleSave(type) {
-
+    console.log("before save:" + history)
     const configuration = {
       method: "post",
       url: GAMES_API_URL + "save",
