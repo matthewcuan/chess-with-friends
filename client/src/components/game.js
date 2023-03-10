@@ -260,7 +260,7 @@ export default function Game() {
                      required
                 />
             </Form.Group>
-            <Button id="chat-button" variant="primary" type="submit">
+            <Button id="exit-button" variant="primary" type="submit">
                 Send
             </Button>
         </Form>

@@ -78,13 +78,6 @@ export default function HomePage() {
             <button onClick={() => navigate('/gchat')}>
                 Chat with Others
             </button>
-            <ul>
-                <li>Private Game</li>
-                <li>Public Game</li>
-                <li>Public Game</li>
-                <li>Private Game</li>
-                <li>Private Game</li>
-            </ul>
         </div>
     )
 }

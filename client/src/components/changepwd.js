@@ -59,7 +59,7 @@ export default function ChangePwd() {
     };
 
     return (
-        <div>
+        <div className="signup">
             <h1>Change Password</h1>
             <Form className="form" noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
                 <Form.Group className="input" controlId="validationCustomOld">
@@ -69,7 +69,7 @@ export default function ChangePwd() {
                         type="text"
                         value={old}
                         onChange={(e) => setOld(e.target.value)}
-                        placeholder="Enter old password here"
+                        placeholder="Enter old password"
                         required
                     />
                 </Form.Group>
@@ -80,7 +80,7 @@ export default function ChangePwd() {
                         type="text"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        placeholder="Enter new password here"
+                        placeholder="Enter new password"
                         required
                     />
                 </Form.Group>
@@ -89,7 +89,7 @@ export default function ChangePwd() {
                 </Button>
             </Form>
             <button onClick={() => navigate('/home')}>
-                Return to profile
+                Return to home page
             </button>
         </div>
         

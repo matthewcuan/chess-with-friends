@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client'
 import Cookies from 'universal-cookie';
 import { Form, Button } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 export default function GlobalChat() {
 
@@ -10,6 +11,7 @@ export default function GlobalChat() {
     const [message, setMessage] = useState("");
     const [socket, setSocket] = useState("");
     const messagesRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const socket = io("http://localhost:5000");
@@ -62,7 +64,11 @@ export default function GlobalChat() {
                 <Button id="chat-button" variant="primary" type="submit">
                     Send
                 </Button>
+                <button id="exit-button" onClick={() => navigate('/home')}>
+                    Return Home
+                </button>
             </Form>
+
         </div>   
     )
 }
