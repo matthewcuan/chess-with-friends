@@ -64,20 +64,23 @@ export default function HomePage() {
                     Join Game
                 </Button>
             </Form>
-            <button onClick={() => {
-                navigate('/');
-                cookies.remove("USER");
-                cookies.remove("GAME_ID");
-                cookies.remove("NEW_GAME_ID")
-            }}>
-                Log Out
-            </button>
-            <button onClick={() => navigate('/changepwd')}>
-                Change Password
-            </button>
-            <button onClick={() => navigate('/gchat')}>
-                Chat with Others
-            </button>
+            <div className="buttons">
+                <button onClick={() => {
+                    navigate('/');
+                    cookies.remove("USER");
+                    cookies.remove("GAME_ID");
+                    cookies.remove("NEW_GAME_ID")
+                }}>
+                    Log Out
+                </button>
+                <button onClick={() => navigate('/changepwd')}>
+                    Change Password
+                </button>
+                <button onClick={() => navigate('/gchat')}>
+                    Chat with Others
+                </button>
+            </div>
+            
         </div>
     )
 }

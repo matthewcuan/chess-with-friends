@@ -111,7 +111,8 @@ MongoClient.connect(
         socket.on('new move', (fen) => {
             console.log("a new move was made");
             io.emit('new move', fen);
-            history = [...history, fen];
+            history.push(fen);
+            console.log(history)
         })
 
         socket.on('chat message', (msg) => {

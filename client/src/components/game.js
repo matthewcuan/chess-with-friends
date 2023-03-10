@@ -7,6 +7,7 @@ import io from "socket.io-client";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { GAMES_API_URL } from "../utils/constants";
+import { history, setHistory } from "../utils/history";
 
 export default function Game() {
   
