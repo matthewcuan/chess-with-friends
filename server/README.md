@@ -31,6 +31,8 @@ curl -X POST http://localhost:8000/api/v1/games/save -H "Content-Type: applicati
 
 curl -X PUT http://localhost:8000/api/v1/games/game/6407c78f89265e6d5c3f62bf -H "Content-Type: application/json" -d '{"title": "update test"}'
 
+curl -X PUT http://localhost:8000/api/v1/users/changepwd/yoda -H "Content-Type: application/json" -d '{"password": "doggy"}'
+
 curl -X DELETE http://localhost:8000/api/v1/games/game/6407c78f89265e6d5c3f62bf
 
 curl -X GET http://localhost:8000/api/v1/games/player1

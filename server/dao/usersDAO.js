@@ -42,4 +42,17 @@ export default class UsersDAO {
       }
     }
 
+    static async updateUser(user, password) {
+      try {
+        const updateResponse = await users.updateOne(
+          { user: user },
+          { $set: { password: password } }
+        )
+        return updateResponse
+      } catch (e) {
+        console.error(`Unable to update user: ${e}`)
+        return { error: e }
+      }
+    }
+
 }
