@@ -1,5 +1,10 @@
 // import io from "socket.io-client";
 
-// var socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+
+// socket.on('connect', () => {
+//       console.log('connected to socket');
+//     });
+
 
 // export { socket }

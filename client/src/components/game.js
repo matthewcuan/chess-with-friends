@@ -76,10 +76,10 @@ export default function Game() {
       console.log(history);
       // console.log(fen)
       // history.push(fen)
-      // console.log("game.fen():" + game.fen())
+      // console.log("game.fen():" + ga
+      // setHistory([...history, fen]);me.fen())
       // console.log("history:" + history)
       // console.log([...history, fen])
-      // setHistory([...history, fen]);
       // setHistory(prevHistory => [...prevHistory, game.fen()]);
       // console.log(game.pgn);
       // console.log(game.history())
@@ -123,11 +123,82 @@ export default function Game() {
       socket.disconnect();
     };
   }, [])
+
+  // socket.on('connect', () => {
+  //   console.log('connected to socket');
+  // });
+
+  // if (!gameId) {
+  //   socket.emit('createNewGame', {id:newId, user:user});
+  //   console.log(`created new game: ${newId}`)
+  //   setId(newId)
+  // } else {
+  //   socket.emit('createNewGame', {id:gameId, user:user});
+  //   console.log(`joined game: ${gameId}`)
+  //   setId(gameId)
+  // }
+
+  // socket.on('message', (msg) => {
+  //   const item = document.createElement('li');
+  //   item.textContent = msg;
+  //   console.log("adding message")
+  //   messagesRef.current.appendChild(item);
+  //   window.scrollTo(0, document.body.scrollHeight);
+  // }); 
+
+  // socket.on('new move', (fen) => {
+  //   console.log('setting new board: ' + fen)
+  //   setBoard(fen);
+  //   game.load(fen);
+  //   console.log(history);
+  //   // console.log(fen)
+  //   // history.push(fen)
+  //   // console.log("game.fen():" + ga
+  //   // setHistory([...history, fen]);me.fen())
+  //   // console.log("history:" + history)
+  //   // console.log([...history, fen])
+  //   // setHistory(prevHistory => [...prevHistory, game.fen()]);
+  //   // console.log(game.pgn);
+  //   // console.log(game.history())
+  //   // console.log("new history")
+  //   // console.log(history)
+  //   // console.log("updating game")
+  //   // setGame(game);
+  // })
+
+  // socket.on('board position', (orientation) => {
+  //   console.log(orientation);
+  //   setOrientation(orientation);
+  // })
+
+  // socket.on('room full', (msg) => {
+  //   alert(msg);
+  //   console.log('room full')
+  //   navigate('/home');
+  // })
+
+  // socket.on('end game', () => {
+  //   game.reset();
+  // })
+
+  // socket.on('save options', () => {
+  //   const msg = document.createElement('li');
+  //   msg.textContent = "Would you like to save this game?"
+  //   const save = document.createElement('button');
+  //   save.onclick = () => handleSaveOptions();
+  //   save.textContent = 'Yes';
+  //   msg.appendChild(save);
+  //   const no_save = document.createElement('button');
+  //   no_save.textContent = 'No';
+  //   no_save.onclick = () => handleExit();
+  //   msg.appendChild(no_save);
+  //   messagesRef.current.appendChild(msg);
+  //   window.scrollTo(0, document.body.scrollHeight);
+  // })
   
 
   useEffect(() => {
     console.log('setting new board: ' + board)
-    game.load(board);
     setHistory(prevHistory => [...prevHistory, game.fen()]);
     console.log(history);
   }, [board])
@@ -207,6 +278,7 @@ export default function Game() {
 
   function handleSaveOptions() {
     console.log("showing options")
+    console.log(history)
     const msg = document.createElement('li');
     msg.innerText = "Choose a save option: "
     const public_save = document.createElement('button');
