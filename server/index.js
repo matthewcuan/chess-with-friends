@@ -66,6 +66,8 @@ MongoClient.connect(
 .then(() => {
     io.on("connection", (socket) => {
         console.log('a user connected');
+
+        var history = [];
         
         socket.on("createNewGame", (game) => {
             // if (socket.adapter.sids.size < 2) {
@@ -114,6 +116,7 @@ MongoClient.connect(
         socket.on('new move', (fen) => {
             console.log("a new move was made");
             io.emit('new move', fen);
+            history = [...history, fen];
         })
 
         socket.on('chat message', (msg) => {
@@ -122,6 +125,8 @@ MongoClient.connect(
         });
 
         socket.on('disconnect', () => {
+            console.log("sending history");
+            io.to(gameId).emit('history', history);
             socket.broadcast.to(gameId).emit('message', "Opponent left. You won by abandonment.");
             socket.broadcast.to(gameId).emit('end game');
             io.to(gameId).emit('save options');
@@ -139,6 +144,8 @@ MongoClient.connect(
             socket.broadcast.to(gameId).emit('message', msgs.loser)
             io.to(gameId).emit('save options');
             io.to(gameId).emit('end game');
+            console.log("sending history")
+            io.to(gameId).emit('history', history);
         })
 
         socket.on('restart game', () => {
