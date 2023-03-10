@@ -1,5 +1,4 @@
 import dotenv from 'dotenv'
-// import app from "./server.js"
 import mongodb from "mongodb"
 import UsersDAO from "./dao/usersDAO.js"
 import GamesDAO from "./dao/gamesDAO.js"
@@ -70,10 +69,6 @@ MongoClient.connect(
         var history = [];
         
         socket.on("createNewGame", (game) => {
-            // if (socket.adapter.sids.size < 2) {
-            //     socket.join(gameId);
-            //     console.log(`a user joined room ${gameId}`);
-            // }
             var room = socket.adapter.rooms.get(`${game.id}`); // get the room object
             user = game.user;
             gameId = game.id;
@@ -84,7 +79,7 @@ MongoClient.connect(
                 io.to(socket.id).emit('message', "Game initiated... waiting for other player");
                 room = socket.adapter.rooms.get(`${game.id}`);
             }
-            // var occupany = parseInt(socket.adapter.sids.size);
+
             if (parseInt(room.size) < 2) {
                 socket.join(game.id);
                 console.log(orientation);
@@ -156,7 +151,7 @@ MongoClient.connect(
 
         socket.on('message', (msg) => {
             console.log('message: ' + msg.chat + " to " + msg.gameId);
-            io.to(msg.gameId).emit('message', msg.chat);
+            io.to(gameId).emit('message', msg.chat);
         });
       });
 

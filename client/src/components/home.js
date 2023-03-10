@@ -14,7 +14,6 @@ export default function HomePage() {
     const navigate = useNavigate();
 
     const [validated, setValidated] = useState(false);
-    const [newGame, setNewGame] = useState("");
     const [gameId, setGameId] = useState("");
 
     const cookies = new Cookies();
@@ -46,33 +45,9 @@ export default function HomePage() {
         setValidated(true);
     }
 
-    function handleStart() {
-        cookies.set("NEW_GAME_ID", newGame, {
-            path: BASE_API_URL
-        })  
-        navigate('/game');
-    }
-    
-
     return (
         <div id="home">
             <h1>Welcome, {user}!</h1>
-            <Form className="game" noValidate validated={validated} onSubmit={handleStart}>
-                <Form.Group className="game-input" controlId="validationCustomUsername">
-                    <Form.Control
-                        name="new-game"
-                        type="text"
-                        value={newGame}
-                        onChange={(e) => setNewGame(e.target.value)}
-                        placeholder="Enter game id here"
-                        autoComplete="false"
-                        required
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Create Game
-                </Button>
-            </Form>
             <Form className="game" noValidate validated={validated} onSubmit={handleJoin}>
                 <Form.Group className="game-input" controlId="validationCustomUsername">
                     <Form.Control

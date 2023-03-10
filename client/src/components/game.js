@@ -7,8 +7,6 @@ import io from "socket.io-client";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { GAMES_API_URL } from "../utils/constants";
-// import { socket } from "../connection/socket"
-// import { history } from "../utils/context";
 
 export default function Game() {
   
@@ -18,7 +16,6 @@ export default function Game() {
   const [id, setId] = useState("");
   const [board, setBoard] = useState(game.fen());
   const [orientation, setOrientation] = useState("black");
-  // const [mounted, setMounted] = useState(false);
   
   const [message, setMessage] = useState("");
   const messagesRef = useRef(null);
@@ -27,9 +24,9 @@ export default function Game() {
   const cookies = new Cookies();
   const user = useMemo(() => new Cookies().get("USER"), []);
 
-  const newId = useMemo(() => new Cookies().get("NEW_GAME_ID"), []);
   const gameId = useMemo(() => new Cookies().get("GAME_ID"), []);
 
+  // checks if user is logged in
   useEffect(() => {
 
     console.log("useEffect called")
@@ -41,6 +38,7 @@ export default function Game() {
     checkLoggedIn();
   }, []);
 
+  // connects to socket and listens for events
   useEffect(() => {
     const socket = io("http://localhost:5000", {
       user: user
@@ -51,15 +49,9 @@ export default function Game() {
       console.log('connected to socket');
     });
 
-    if (!gameId) {
-      socket.emit('createNewGame', {id:newId, user:user});
-      console.log(`created new game: ${newId}`)
-      setId(newId)
-    } else {
-      socket.emit('createNewGame', {id:gameId, user:user});
-      console.log(`joined game: ${gameId}`)
-      setId(gameId)
-    }
+    socket.emit('createNewGame', {id:gameId, user:user});
+    console.log(`joined game: ${gameId}`)
+    setId(gameId)
 
     socket.on('message', (msg) => {
       const item = document.createElement('li');
@@ -74,19 +66,6 @@ export default function Game() {
       setBoard(fen);
       game.load(fen);
       console.log(history);
-      // console.log(fen)
-      // history.push(fen)
-      // console.log("game.fen():" + ga
-      // setHistory([...history, fen]);me.fen())
-      // console.log("history:" + history)
-      // console.log([...history, fen])
-      // setHistory(prevHistory => [...prevHistory, game.fen()]);
-      // console.log(game.pgn);
-      // console.log(game.history())
-      // console.log("new history")
-      // console.log(history)
-      // console.log("updating game")
-      // setGame(game);
     })
 
     socket.on('board position', (orientation) => {
@@ -130,14 +109,14 @@ export default function Game() {
     };
   }, [])
 
-
+  // updates board history each time board changes
   useEffect(() => {
     console.log('setting new board: ' + board)
     setHistory(prevHistory => [...prevHistory, game.fen()]);
     console.log(history);
   }, [board])
-  // newId, gameId, game, user, navigate
 
+  // EVENT HANDLERS
   function handlePieceDrop(source, target) {
     let move = game.move({
       from: source,
@@ -146,7 +125,6 @@ export default function Game() {
     })
 
     if (game.isGameOver()) {
-      // const winner = (game.turn() === 'w' ? 'White' : 'Black');
       socket.emit('game end', {winner: "You win!", loser: user + " wins!"} );
     }
 
@@ -154,7 +132,6 @@ export default function Game() {
     if (move) {
       setGame(game);
       console.log(game.ascii());
-      // console.log(history)
       console.log(board)
       socket.emit('new move', game.fen());
       return true;
@@ -271,23 +248,23 @@ export default function Game() {
       </div>
       <div className="game-chat">
         <ul id="chat-messages" ref={messagesRef}></ul>
-            <Form id="chat-form" noValidate onSubmit={handleSubmit} autoComplete="off">
-                <Form.Group id="chat-input">
-                    <Form.Control
-                        id="chat-input"
-                        name="message"
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Enter message here..."
-                        required
-                    />
-                </Form.Group>
-                <Button id="chat-button" variant="primary" type="submit">
-                    Send
-                </Button>
-            </Form>
-        </div> 
+        <Form id="chat-form" noValidate onSubmit={handleSubmit} autoComplete="off">
+            <Form.Group id="chat-input">
+                <Form.Control
+                    id="chat-input"
+                    name="message"
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Enter message here..."
+                     required
+                />
+            </Form.Group>
+            <Button id="chat-button" variant="primary" type="submit">
+                Send
+            </Button>
+        </Form>
+      </div> 
       
     </div>
   ) 
