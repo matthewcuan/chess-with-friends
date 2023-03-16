@@ -84,39 +84,6 @@ function SavedGames() {
         }
     }, [configuration])
 
-    // useEffect(() => {
-    //     if (!user) {
-    //         console.log("getting public games")
-    //         setConfiguration({
-    //             method: "get",
-    //             url: GAMES_API_URL + `public-games`
-    //         });
-    //     } else {
-    //         console.log("getting user games")
-    //         setConfiguration({
-    //             method: "get",
-    //             url: GAMES_API_URL + user
-    //         });
-    //     }
-    
-    //     axios(configuration)
-    //     // if user exists
-    //     .then((response) => {
-    //         console.log(response)
-    //         for (let i = 0; i < response.data.length; i++) {
-    //             const game = document.createElement('li');
-    //             game.innerText = response.data[i].slice(0, -1);
-    //             gamesRef.current.appendChild(game);
-    //         } 
-    //     })
-    //     // if user does not exist
-    //     .catch((error) => {
-    //         console.log("error fetching games from db")
-    //         return ;
-    //     })
-    // }, [])
-    
-
     return (
         <div className="main">
             {isLoading && <p>Loading...</p>}
