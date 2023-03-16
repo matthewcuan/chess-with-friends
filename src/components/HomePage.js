@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import { BASE_API_URL } from "../utils/constants";
+import { checkLoggedIn } from "../utils/login_check"
 
 // options to: 
     // 1. Start a game
@@ -18,19 +19,15 @@ export default function HomePage() {
     const cookies = new Cookies();
     const user = cookies.get("USER");
 
+    // checks if user is logged in
     useEffect( () => {
-        const checkLoggedIn = async () => {
-            if (!user) {
-                navigate('/');
-            }
-        }
-        checkLoggedIn();
+        checkLoggedIn(user);
     });
 
     function handleJoin(event) {
         const form = event.currentTarget;
 
-        // checks if there is a username input
+        // checks if there is a game ID input
         if (form.checkValidity() === false) {
             alert("Game ID required!")
             event.preventDefault();

@@ -1,16 +1,17 @@
-import { React, useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Chessboard } from "react-chessboard";
+import { Form, Button } from "react-bootstrap";
 import { Chess } from "chess.js";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import io from "socket.io-client";
-import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { GAMES_API_URL } from "../utils/constants";
-// import { history, setHistory } from "../utils/history";
+import { checkLoggedIn } from "../utils/login_check";
 
 export default function Game() {
   
+  // init constants
   const [game, setGame] = useState(new Chess());
   const [history, setHistory] = useState([]);
   const [socket, setSocket] = useState(null);
@@ -28,16 +29,9 @@ export default function Game() {
   const gameId = useMemo(() => new Cookies().get("GAME_ID"), []);
 
   // checks if user is logged in
-  useEffect(() => {
-
-    console.log("useEffect called")
-    const checkLoggedIn = async () => {
-        if (!user) {
-            navigate('/');
-        }
-    }
-    checkLoggedIn();
-  }, []);
+  useEffect( () => {
+    checkLoggedIn(user);
+  });
 
   // connects to socket and listens for events
   useEffect(() => {

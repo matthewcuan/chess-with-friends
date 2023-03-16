@@ -3,15 +3,21 @@ import io from 'socket.io-client'
 import Cookies from 'universal-cookie';
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import { checkLoggedIn } from "../utils/login_check"
 
 export default function GlobalChat() {
 
     const cookies = new Cookies();
-    const nickname = cookies.get("USER");
+    const user = cookies.get("USER");
     const [message, setMessage] = useState("");
     const [socket, setSocket] = useState("");
     const messagesRef = useRef(null);
     const navigate = useNavigate();
+
+    // checks if user is logged in
+    useEffect( () => {
+        checkLoggedIn(user);
+    });
 
     useEffect(() => {
         const socket = io("http://localhost:5000");
@@ -38,7 +44,7 @@ export default function GlobalChat() {
     function handleSubmit(event) {
         event.preventDefault();
         if (message.trim()) {
-            var chat = nickname + ": " + message;
+            var chat = user + ": " + message;
             console.log("emitting message")
             socket.emit('chat message', chat);
             setMessage("");

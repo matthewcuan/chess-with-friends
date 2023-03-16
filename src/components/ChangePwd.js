@@ -3,17 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { checkLoggedIn } from "../utils/login_check"
 
 export default function ChangePwd() {
 
-    const navigate = useNavigate();
     const [validated, setValidated] = useState(false);
     const [old, setOld] = useState("");
     const [newPassword, setNewPassword] = useState("");
+
+    const navigate = useNavigate();
     const user = useMemo(() => new Cookies().get("USER"), []);
 
+    // checks if user is logge din
+    useEffect( () => {
+        checkLoggedIn(user);
+    }); 
+
     const handleSubmit = (event) => {
+
         const form = event.currentTarget;
+
         // check if the user input a username and password
         if (form.checkValidity() === false) {
           alert("Both fields required!")
@@ -22,11 +31,13 @@ export default function ChangePwd() {
           return ;
         }
 
+        // check if new pasword is new
         if (old === newPassword) {
             alert("Please enter a different new password.")
             return ;
         }
 
+        // PUT operation to db
         const configuration = {
             method: "put",
             url: `http://localhost:8000/api/v1/users/changepwd/${user}`,
@@ -39,8 +50,6 @@ export default function ChangePwd() {
         axios(configuration)
         .then((response) => {
             if (response.data.status === "success") {
-                console.log(response.data);
-                console.log("success");
                 alert("Password updated!")
                 setValidated(true);
                 setOld("");
@@ -54,8 +63,10 @@ export default function ChangePwd() {
             console.log("error adding user to db");
         })
 
+        // prevents page from reloading
         event.preventDefault();
         event.stopPropagation();
+
     };
 
     return (
