@@ -1,0 +1,147 @@
+body {
+  margin: 0px;
+  background-color: rgb(154, 171, 196);
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin: 15px;
+}
+
+.onboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;
+}
+
+#home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  position: fixed;
+  left: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.review-board {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+}
+
+.board > button {
+  width: 30%;
+}
+
+.hidden {
+  display: none;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background: #b4c1d4;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+thead {
+  background-color: #5e83bb;
+  color: white;
+}
+
+th {
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+td:last-child button {
+  margin: 0px;
+}
+
+#chat-form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+
+#chat-input { 
+  display: flex;
+  align-items: center;
+  border: none; 
+  padding: 0 1rem; 
+  flex-grow: 1; 
+  border-radius: 2rem; 
+  margin: 0.25rem; 
+  height: 80%;
+}
+
+.game-chat {
+  width: 40%;
+  position: absolute;
+  right: 0;
+}
+      
+/* #chat-nickname { border: none; padding: 0 1rem; flex-grow: 0; border-radius: 2rem; margin: 0.25rem; } */
+      
+#chat-input:focus { outline: none; }
+
+#chat-button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+#exit-button { background: rgb(181, 181, 181); border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: rgb(0, 0, 0); }
+            
+#chat-messages { list-style-type: none; margin: 0; padding: 0; }
+      
+#chat-messages > li { padding: 0.5rem 1rem; }
+      
+#chat-messages > li:nth-child(odd) { background: #b4c1d4; }
+      
+#chat-label { display: flex; align-items: center; padding: 10px }
