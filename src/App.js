@@ -5,11 +5,10 @@ import { BrowserRouter as Router, Routes, Route }
   from "react-router-dom";
 import Login from "./onboard/login";
 import SignUp from "./onboard/sign_up";
-import History from "./components/history";
 import Password from "./onboard/password";
-import HomePage from "./components/home";
-import ChangePwd from "./components/changepwd";
-import GlobalChat from "./components/global_chat";
+import HomePage from "./components/Home";
+import ChangePwd from "./components/ChangePwd";
+import GlobalChat from "./components/GlobalChat";
 import ReviewHistory from "./components/ReviewHistory";
 import SavedGames from "./components/SavedGames";
 
@@ -23,7 +22,6 @@ export default function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/game" element={<Game />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/history" element={<History />} />
           <Route path="/changepwd" element={<ChangePwd />} />
           <Route path="/gchat" element={<GlobalChat />} />
           <Route path="/review" element={<ReviewHistory />} />
