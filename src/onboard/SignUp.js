@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { BASE_API_URL } from "../utils/constants";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import { createHash } from "crypto";
+// import { createHash } from "crypto";
 
 export default function SignUp() {
 
@@ -25,12 +25,12 @@ export default function SignUp() {
           return ;
         }
 
-        // TODO: implement hashing for more secure login js-sha256
-        function hash(string) {
-            return createHash('sha256').update(string).digest('hex');
-        }
+        // // TODO: implement hashing for more secure login js-sha256
+        // function hash(string) {
+        //     return createHash('sha256').update(string).digest('hex');
+        // }
 
-        setPassword(hash(password));
+        // setPassword(hash(password));
 
         const configuration = {
             method: "post",

@@ -26,11 +26,11 @@ export default function Password() {
     const handleSubmit = (event) => {
         const form = event.currentTarget;
 
-        function hash(string) {
-            return createHash('sha256').update(string).digest('hex');
-        }
+        // function hash(string) {
+        //     return createHash('sha256').update(string).digest('hex');
+        // }
 
-        setPassword(hash(password));
+        // setPassword(hash(password));
 
         if (form.checkValidity() === false) {
             alert("Password required!")
