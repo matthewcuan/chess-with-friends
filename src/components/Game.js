@@ -7,7 +7,6 @@ import Cookies from "universal-cookie";
 import io from "socket.io-client";
 import axios from "axios";
 import { GAMES_API_URL } from "../utils/constants";
-import { checkLoggedIn } from "../utils/login_check";
 
 export default function Game() {
   

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import { BASE_API_URL } from "../utils/constants";
-import { checkLoggedIn } from "../utils/login_check"
 
 // options to: 
     // 1. Start a game

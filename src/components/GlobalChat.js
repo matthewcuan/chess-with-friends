@@ -3,7 +3,6 @@ import io from 'socket.io-client'
 import Cookies from 'universal-cookie';
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
-import { checkLoggedIn } from "../utils/login_check"
 
 export default function GlobalChat() {
 
