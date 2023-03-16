@@ -1,9 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { checkLoggedIn } from "../utils/login_check"
 
 export default function ChangePwd() {
 
@@ -16,6 +15,11 @@ export default function ChangePwd() {
 
     // checks if user is logge din
     useEffect( () => {
+        const checkLoggedIn = async () => {
+            if (!user) {
+                navigate('/');
+            }
+        }
         checkLoggedIn(user);
     }); 
 

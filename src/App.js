@@ -1,12 +1,12 @@
-import "./App.css";
-import Game from "./components/game";
 import { React } from "react";
 import { BrowserRouter as Router, Routes, Route } 
   from "react-router-dom";
-import Login from "./onboard/login";
-import SignUp from "./onboard/sign_up";
-import Password from "./onboard/password";
-import HomePage from "./components/Home";
+import "./App.css";
+import Game from "./components/Game";
+import Login from "./onboard/Login";
+import SignUp from "./onboard/SignUp";
+import Password from "./onboard/Password";
+import HomePage from "./components/HomePage";
 import ChangePwd from "./components/ChangePwd";
 import GlobalChat from "./components/GlobalChat";
 import ReviewHistory from "./components/ReviewHistory";

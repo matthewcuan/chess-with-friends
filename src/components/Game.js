@@ -28,10 +28,15 @@ export default function Game() {
 
   const gameId = useMemo(() => new Cookies().get("GAME_ID"), []);
 
-  // checks if user is logged in
+  // checks if user is logge din
   useEffect( () => {
+    const checkLoggedIn = async () => {
+        if (!user) {
+            navigate('/');
+        }
+    }
     checkLoggedIn(user);
-  });
+}); 
 
   // connects to socket and listens for events
   useEffect(() => {

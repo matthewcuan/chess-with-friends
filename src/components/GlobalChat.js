@@ -14,10 +14,15 @@ export default function GlobalChat() {
     const messagesRef = useRef(null);
     const navigate = useNavigate();
 
-    // checks if user is logged in
+    // checks if user is logge din
     useEffect( () => {
+        const checkLoggedIn = async () => {
+            if (!user) {
+                navigate('/');
+            }
+        }
         checkLoggedIn(user);
-    });
+    }); 
 
     useEffect(() => {
         const socket = io("http://localhost:5000");
