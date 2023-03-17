@@ -24,7 +24,7 @@ export default function GlobalChat() {
     }); 
 
     useEffect(() => {
-        const socket = io("https://chesswithfriends-socketio.herokuapp.com:5000");
+        const socket = io("https://chesswithfriends-socketio.herokuapp.com:40571");
         setSocket(socket);
 
         socket.on('connect', () => {

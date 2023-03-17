@@ -43,7 +43,7 @@ export default function Game() {
     let players
     let winner
 
-    const socket = io("https://chesswithfriends-socketio.herokuapp.com:5000", {
+    const socket = io("https://chesswithfriends-socketio.herokuapp.com:40571", {
       user: user
     });
     setSocket(socket);
