@@ -34,7 +34,7 @@ export default function SignUp() {
 
         const configuration = {
             method: "post",
-            url: `http://localhost:8000/api/v1/users/signup`,
+            url: BASE_API_URL+ 'signup',
             data: {
                 username,
                 password
