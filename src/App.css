@@ -138,7 +138,7 @@ td:last-child button {
 
 #exit-button { background: rgb(181, 181, 181); border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: rgb(0, 0, 0); }
             
-#chat-messages { list-style-type: none; margin: 0; padding: 0; margin: 48px; }
+#chat-messages { list-style-type: none; margin: 0; padding: 0; margin-bottom: 48px; }
       
 #chat-messages > li { padding: 0.5rem 1rem; }
       
