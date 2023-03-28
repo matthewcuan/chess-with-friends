@@ -13,7 +13,7 @@ export default function Login() {
     return (
         
         <div className="onboard">
-            <div className="login">
+            <div className="onboard-card">
                 
                 <div className="title-card">
                     <p className="title">

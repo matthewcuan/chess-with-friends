@@ -64,7 +64,7 @@ export default function Password() {
 
     return (
         <div className="onboard">
-             <div className="login">
+             <div className="onboard-card">
                 <div className="title-card">
                     <p className="title">
                         CHESS 
@@ -117,23 +117,6 @@ export default function Password() {
             <div className="login-image">
                 <img src={Image}></img>
             </div>
-            {/* <h1>Enter Password</h1>
-            <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
-                <Form.Group className="input" controlId="validationCustomUsername">
-                    <Form.Label>Password: </Form.Label>
-                    <Form.Control
-                        name="password"
-                        type="text"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Enter password here"
-                        required
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Login
-                </Button>
-            </Form> */}
         </div>    
     )
 

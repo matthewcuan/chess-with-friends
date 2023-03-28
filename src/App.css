@@ -25,7 +25,7 @@ button {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background: radial-gradient(50% 50% at 70% 70%,#ce6133, #4e160a);
+  background: radial-gradient(50% 50% at 80% 70%,#ce6133, #4e160a);
 }
 
 @font-face { 
@@ -42,7 +42,7 @@ button {
   src: url('Delicious-Bold.otf');
 } */
 
-.login {
+.onboard-card {
   width: 40%;
   position: absolute;
   height: 100vh;
