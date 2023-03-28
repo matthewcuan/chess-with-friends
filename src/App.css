@@ -79,6 +79,9 @@ button {
   width: 65%;
   position: absolute;
   top: 40%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-label {
@@ -97,6 +100,26 @@ button {
   height: 100%;
 }
 
+.primary-button {
+  width: 90%;
+  background-color: #ebac43;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bolder;
+  margin: 0;
+  margin: 15px;
+  height: 30%;
+}
+
+.transparent {
+  background-color: transparent;
+  color: white;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: white;
+}
+
 .additional-buttons {
   display: flex;
   justify-content: space-between;
@@ -104,10 +127,19 @@ button {
 
 .add-button {
   width: 40%;
+  margin: 0;
+  margin-top: 10%;
+  background-color: transparent;
+  color: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: white;
 }
 
 .add-button2 {
-  width: 89%;
+  width: 100%;
+  margin: 15px;
 }
 
 .login-image {
