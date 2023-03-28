@@ -1,6 +1,6 @@
 body {
   margin: 0px;
-  background-color: rgb(154, 171, 196);
+  background-color: #4e160a;
 }
 
 .main {
@@ -13,6 +13,9 @@ body {
 
 button {
   margin: 15px;
+  border: none;
+  border-radius: 3px;
+  padding: .2rem;
 }
 
 .onboard {
@@ -20,6 +23,105 @@ button {
   flex-direction: column;
   justify-content: center;  
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(50% 50% at 70% 70%,#ce6133, #4e160a);
+}
+
+@font-face { 
+  font-family: Lora-Bold; 
+  src: url("./assets/fonts/Lora-Bold.otf") format('otf'); 
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* @font-face { 
+  font-family: Lora; 
+  font-weight: bold; 
+  src: url('Delicious-Bold.otf');
+} */
+
+.login {
+  width: 40%;
+  position: absolute;
+  height: 100vh;
+  left: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: flex-start;
+}
+
+.title-card {
+  position: absolute;
+  top: 15%;
+}
+
+.title {
+  font-family: Lora-Bold;
+  color: #ebac43;
+  font-size: 3rem;
+  margin: 0;
+}
+
+.with {
+  font-size: 2rem;
+  font-weight: lighter;
+  margin: 0;
+}
+
+.login-card {
+  background-color: rgba(255, 255, 255, 0.221);
+  border-radius: 30px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  padding: 60px;
+  width: 65%;
+  position: absolute;
+  top: 40%;
+}
+
+.form-label {
+  color: white;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.form-control-custom {
+  display: flex;
+  align-items: center;
+  border: none; 
+  padding: 0.25rem 1rem; 
+  flex-grow: 1; 
+  border-radius: 2rem; 
+  height: 100%;
+}
+
+.additional-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-button {
+  width: 40%;
+}
+
+.add-button2 {
+  width: 89%;
+}
+
+.login-image {
+  width: 50%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.login-image > img {
+  width: 80%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 #home {
@@ -38,7 +140,7 @@ button {
 .input {
   display: flex;
   justify-content: space-between;
-  margin: 5px;
+  margin: 15px;
 }
 
 .game {
@@ -111,7 +213,18 @@ td:last-child button {
   margin: 0px;
 }
 
-#chat-form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+#chat-form { 
+  background: rgba(0, 0, 0, 0.15); 
+  padding: 0.25rem; 
+  position: fixed; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  display: flex; 
+  height: 3rem; 
+  box-sizing: border-box; 
+  backdrop-filter: blur(10px); 
+}
 
 #chat-input { 
   display: flex;
@@ -129,12 +242,20 @@ td:last-child button {
   position: absolute;
   right: 0;
 }
-      
-/* #chat-nickname { border: none; padding: 0 1rem; flex-grow: 0; border-radius: 2rem; margin: 0.25rem; } */
-      
-#chat-input:focus { outline: none; }
+            
+#chat-input:focus { 
+  outline: none; 
+}
 
-#chat-button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+#chat-button { 
+  background: #333; 
+  border: none; 
+  padding: 0 1rem; 
+  margin: 0.25rem; 
+  border-radius: 3px; 
+  outline: none; 
+  color: #fff; 
+}
 
 #exit-button { background: rgb(181, 181, 181); border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: rgb(0, 0, 0); }
             

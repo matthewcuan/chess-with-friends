@@ -4,6 +4,8 @@ import { Form, Button } from "react-bootstrap";
 import { BASE_API_URL, HOST_URL } from "../utils/constants"
 import Cookies from "universal-cookie"
 import axios from "axios";
+import Image from '../assets/images/chess-login.png';
+
 
 export default function Login() {
 
@@ -54,30 +56,49 @@ export default function Login() {
 
     return (
         <div className="onboard">
-            <h1>Chess with Friends</h1>
-            <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
-                <Form.Group className="input" controlId="validationCustomUsername">
-                    <Form.Label>Login: </Form.Label>
-                    <Form.Control
-                        name="username"
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Enter username here"
-                        autoComplete="false"
-                        required
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Next
-                </Button>
-            </Form>
-            <button onClick={() => navigate('/signup')}>
-                Create Account
-            </button>
-            <button onClick={() => navigate('/saved')}>
-                Games
-            </button>
+            <div className="login">
+                <div className="title-card">
+                    <p className="title">
+                        CHESS 
+                        <p className="with">
+                            with
+                        </p> 
+                        FRIENDS
+                    </p>
+                </div>
+                <div className="login-card">
+                    <Form className="form" noValidate validated={validated} onSubmit={handleSubmit}>
+                        <Form.Group className="input" controlId="validationCustomUsername">
+                            <Form.Label className="form-label">Login: </Form.Label>
+                            <Form.Control
+                                name="username"
+                                className="form-control-custom"
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Enter username here"
+                                autoComplete="false"
+                                required
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Next
+                        </Button>
+                    </Form>
+                    <div className="additional-buttons">
+                        <button className="add-button" onClick={() => navigate('/signup')}>
+                            Create Account
+                        </button>
+                        <button className="add-button" onClick={() => navigate('/saved')}>
+                            Games
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className="login-image">
+                <img src={Image}></img>
+            </div>
+            
         </div>
     )
        
