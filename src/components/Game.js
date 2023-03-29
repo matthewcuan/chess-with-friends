@@ -62,9 +62,7 @@ export default function Game() {
       item.textContent = msg;
       console.log("adding message")
       messagesRef.current.appendChild(item);
-      // window.scrollTo(0, document.body.scrollHeight);
-      const container = document.getElementById('chat-box');
-      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }); 
 
     socket.on('new move', (fen) => {
@@ -111,7 +109,7 @@ export default function Game() {
       no_save.onclick = () => handleExit();
       msg.appendChild(no_save);
       messagesRef.current.appendChild(msg);
-      window.scrollTo(0, document.body.scrollHeight);
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     })
 
     return () => {
@@ -185,7 +183,7 @@ export default function Game() {
     exit_game.onclick = () => handleReturn();
     msg.appendChild(exit_game);
     messagesRef.current.appendChild(msg);
-    window.scrollTo(0, document.body.scrollHeight);
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   }
 
   // TODO: fix this
@@ -214,9 +212,7 @@ export default function Game() {
     private_save.onclick = () => handleSave("private", saveHistory, players, winner)
     msg.appendChild(private_save);
     messagesRef.current.appendChild(msg);
-    // window.scrollTo(0, document.body.scrollHeight);
-    const container = document.getElementById('chat-box-container');
-    container.scrollTop = container.scrollHeight - container.clientHeight;
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   }
 
   // For todays date;
@@ -259,7 +255,7 @@ export default function Game() {
       const item = document.createElement('li');
       item.textContent = "Game successfully saved.";
       messagesRef.current.appendChild(item);
-      window.scrollTo(0, document.body.scrollHeight);
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     })
     // if user does not exist
     .catch((error) => {
@@ -278,7 +274,7 @@ export default function Game() {
           boardOrientation={orientation}
         />
       </div>
-      <div className="game-chat" id="chat-box">
+      <div className="chat-container game-chat" id="chat-box">
         <ul id="chat-messages" ref={messagesRef}></ul>
         <Form id="chat-form" noValidate onSubmit={handleSubmit} autoComplete="off">
             <Form.Group id="chat-input">

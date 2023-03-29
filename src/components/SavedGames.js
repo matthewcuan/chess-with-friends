@@ -3,6 +3,7 @@ import { GAMES_API_URL, HOST_URL } from '../utils/constants';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Arrow from "../assets/icons/arrow.png";
 
 function SavedGames() {
 
@@ -85,7 +86,7 @@ function SavedGames() {
     }, [configuration])
 
     return (
-        <div className="main">
+        <div className="saved-screen">
             {isLoading && <p>Loading...</p>}
             <table className='table'>
                 <thead>
@@ -99,10 +100,12 @@ function SavedGames() {
                 <tbody ref={tableRef}>
                 </tbody>
             </table>
-            <ul id="chat-messages" ref={gamesRef}></ul>
-            <button onClick={() => navigate('/home')}>
-                Return Home
-            </button>
+            <div className="buttons account-actions">
+                <button className="account-button text-left" onClick={() => navigate("/home")}>
+                    <img className="icon" src={Arrow}></img>
+                    Return
+                </button>
+            </div>
         </div>
     )
 }
