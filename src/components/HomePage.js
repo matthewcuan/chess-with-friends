@@ -51,8 +51,8 @@ export default function HomePage() {
     return (
         <div id="home">
             <div className="welcome-card">
-                <p class="welcome-title">Chess with Friends</p>
-                <p class="welcome">Welcome, {user}!</p>
+                <p className="welcome-title">Chess with Friends</p>
+                <p className="welcome">Welcome, {user}!</p>
             </div>
             
             <motion.aside

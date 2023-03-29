@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import io from "socket.io-client";
 import axios from "axios";
-import { GAMES_API_URL } from "../utils/constants";
+import { GAMES_API_URL, SOCKET_URL } from "../utils/constants";
 
 export default function Game() {
   
@@ -43,7 +43,7 @@ export default function Game() {
     let players
     let winner
 
-    const socket = io("https://chesswithfriends-socketio.herokuapp.com", {
+    const socket = io(SOCKET_URL, {
       user: user
     });
     setSocket(socket);

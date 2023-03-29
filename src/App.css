@@ -107,7 +107,7 @@ button:hover {
   flex-grow: 1; 
   border-radius: 2rem; 
   height: 100%;
-  margin: 10px;
+  margin: 8.5px;
   background-color: transparent;
 }
 
@@ -337,8 +337,35 @@ table {
   border-collapse: collapse;
 }
 
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+  
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+table thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+table thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* td, th {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: inherit;
+} */
+
 tbody tr:nth-child(odd) {
-  background: #b4c1d4;
+  background: #ffffff94;
+}
+
+tbody tr:nth-child(even) {
+  background: #ffffff43; 
+  color: white;
 }
 
 td {
@@ -348,8 +375,8 @@ td {
 }
 
 thead {
-  background-color: #5e83bb;
-  color: white;
+  background-color: #ebac43;
+  color: black;
 }
 
 th {
@@ -357,6 +384,7 @@ th {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
+
 }
 
 td:last-child button {
@@ -413,6 +441,13 @@ td:last-child button {
       
 #chat-messages > li { padding: 0.5rem 1rem; }
       
-#chat-messages > li:nth-child(odd) { background: #b4c1d4; }
+#chat-messages > li:nth-child(odd) { 
+  background: #ffffff94; 
+}
+
+#chat-messages > li:nth-child(even) { 
+  background: #ffffff43; 
+  color: white;
+}
       
 #chat-label { display: flex; align-items: center; padding: 10px }
