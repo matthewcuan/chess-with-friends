@@ -5,7 +5,8 @@ import { BASE_API_URL } from "../utils/constants";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { motion } from "framer-motion";
-import Image from '../assets/images/chess-login.png';
+import LoginImage from '../assets/images/chess-login.png';
+import TitleCard from "../components/TitleCard";
 
 export default function SignUp() {
 
@@ -25,13 +26,6 @@ export default function SignUp() {
           event.stopPropagation();
           return ;
         }
-
-        // // TODO: implement hashing for more secure login js-sha256
-        // function hash(string) {
-        //     return createHash('sha256').update(string).digest('hex');
-        // }
-
-        // setPassword(hash(password));
 
         const configuration = {
             method: "post",
@@ -69,15 +63,7 @@ export default function SignUp() {
     return (
         <div className="onboard">
             <div className="onboard-card">
-                <div className="title-card">
-                    <p className="title">
-                        CHESS 
-                        <p className="with">
-                            with
-                        </p> 
-                        FRIENDS
-                    </p>
-                </div>
+                <TitleCard />
                 <motion.aside
                     initial={{ opacity: .5 }}
                     whileInView={{ opacity: 1 }}
@@ -85,9 +71,10 @@ export default function SignUp() {
                 >
                     <Form className="form login-card" noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
                         <Form.Group className="input" controlId="validationCustomUsername">
-                            <Form.Label>Username: </Form.Label>
+                            <Form.Label className="form-label">Username: </Form.Label>
                             <Form.Control
                                 name="username"
+                                className="form-control-custom"
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
@@ -96,10 +83,11 @@ export default function SignUp() {
                             />
                         </Form.Group>
                         <Form.Group className="input" controlId="validationCustomUsername">
-                            <Form.Label>Password: </Form.Label>
+                            <Form.Label className="form-label">Password: </Form.Label>
                             <Form.Control
-                                type="text"
                                 name="password"
+                                className="form-control-custom"
+                                type="text"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Enter password here"
@@ -110,13 +98,13 @@ export default function SignUp() {
                             Sign Up
                         </Button>
                         <button className="add-button" onClick={() => navigate('/')}>
-                            Return to login
+                            Return
                         </button>
                     </Form>
                 </motion.aside>   
             </div>
             <div className="login-image">
-                <img src={Image}></img>
+                <img src={LoginImage}></img>
             </div>  
         </div>
     )   

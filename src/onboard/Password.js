@@ -2,10 +2,11 @@ import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Cookies from "universal-cookie";
-import Image from '../assets/images/chess-login.png';
+import LoginImage from '../assets/images/chess-login.png';
 import axios from "axios";
 import { BASE_API_URL } from "../utils/constants";
 import { motion } from "framer-motion";
+import TitleCard from "../components/TitleCard";
 
 export default function Password() {
 
@@ -65,15 +66,7 @@ export default function Password() {
     return (
         <div className="onboard">
              <div className="onboard-card">
-                <div className="title-card">
-                    <p className="title">
-                        CHESS 
-                        <p className="with">
-                            with
-                        </p> 
-                        FRIENDS
-                    </p>
-                </div>
+                <TitleCard />
                 <motion.aside
                     initial={{ opacity: .5 }}
                     whileInView={{ opacity: 1 }}
@@ -109,13 +102,13 @@ export default function Password() {
                             Login
                         </Button>
                         <button className="add-button" onClick={() => navigate('/')}>
-                            Return to Login
+                            Return
                         </button>
                     </Form>
                 </motion.aside>
             </div>
             <div className="login-image">
-                <img src={Image}></img>
+                <img src={LoginImage}></img>
             </div>
         </div>    
     )

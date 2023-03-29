@@ -1,6 +1,7 @@
 body {
   margin: 0px;
   background-color: #4e160a;
+  margin: 0px
 }
 
 .main {
@@ -13,9 +14,15 @@ body {
 
 button {
   margin: 15px;
-  border: none;
+  border: solid;
+  border-color: transparent;
   border-radius: 3px;
   padding: .2rem;
+}
+
+button:hover {
+  border-color: black;
+
 }
 
 .onboard {
@@ -93,11 +100,19 @@ button {
 .form-control-custom {
   display: flex;
   align-items: center;
-  border: none; 
+  border: solid;
+  border-color: white; 
+  color: white;
   padding: 0.25rem 1rem; 
   flex-grow: 1; 
   border-radius: 2rem; 
   height: 100%;
+  margin: 10px;
+  background-color: transparent;
+}
+
+::placeholder {
+  color: white;
 }
 
 .primary-button {
@@ -123,6 +138,7 @@ button {
 .additional-buttons {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 .add-button {
@@ -157,10 +173,105 @@ button {
 }
 
 #home {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;  
   align-items: center;
+  background: radial-gradient(30% 35%,#ce6133, #4e160a);
+}
+
+.welcome-card {
+  font-family: Lora-Bold;
+  color: #ebac43;
+  position: absolute;
+  top: 15%;
+}
+
+.welcome-title {
+  margin: 0;
+}
+
+.welcome {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.home-card {
+  background-color: rgba(255, 255, 255, 0.221);
+  border-radius: 30px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  padding: 60px;
+  width: 30%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-label {
+  position: relative;
+  left: -22%;
+}
+
+.join-button {
+  background-color: #ebac43;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: bolder;
+  margin: 0;
+}
+
+.additional-home-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 60%;
+}
+
+.add-home-button {
+  margin: 0;
+  width: 100%;
+  margin-top: 10%;
+  background-color: transparent;
+  color: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: white;
+}
+
+.account-actions {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: 12%;
+}
+
+.account-button {
+  margin: 0;
+  margin-top: 10%;
+  margin-right: 10%;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.account-button:hover {
+  border-radius: 5px;
+  border-color: white;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.icon {
+  width: 15%;
+  margin-right: 5px;
 }
 
 .signup {
@@ -172,14 +283,21 @@ button {
 .input {
   display: flex;
   justify-content: space-between;
-  margin: 15px;
+  align-items: center;
+  margin: 0;
 }
 
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   margin: 5px;
+}
+
+.game-input {
+  display: flex;
+  flex-direction: row;
+  height: 40%;
 }
 
 .form {
