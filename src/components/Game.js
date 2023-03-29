@@ -7,6 +7,7 @@ import Cookies from "universal-cookie";
 import io from "socket.io-client";
 import axios from "axios";
 import { GAMES_API_URL, SOCKET_URL } from "../utils/constants";
+import Arrow from "../assets/icons/arrow.png";
 
 export default function Game() {
   
@@ -61,7 +62,9 @@ export default function Game() {
       item.textContent = msg;
       console.log("adding message")
       messagesRef.current.appendChild(item);
-      window.scrollTo(0, document.body.scrollHeight);
+      // window.scrollTo(0, document.body.scrollHeight);
+      const container = document.getElementById('chat-box');
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
     }); 
 
     socket.on('new move', (fen) => {
@@ -211,7 +214,9 @@ export default function Game() {
     private_save.onclick = () => handleSave("private", saveHistory, players, winner)
     msg.appendChild(private_save);
     messagesRef.current.appendChild(msg);
-    window.scrollTo(0, document.body.scrollHeight);
+    // window.scrollTo(0, document.body.scrollHeight);
+    const container = document.getElementById('chat-box-container');
+    container.scrollTop = container.scrollHeight - container.clientHeight;
   }
 
   // For todays date;
@@ -272,11 +277,8 @@ export default function Game() {
           onPieceDrop={handlePieceDrop}
           boardOrientation={orientation}
         />
-        <button onClick={() => handleReturn()}>
-          Exit Game
-        </button>
       </div>
-      <div className="game-chat">
+      <div className="game-chat" id="chat-box">
         <ul id="chat-messages" ref={messagesRef}></ul>
         <Form id="chat-form" noValidate onSubmit={handleSubmit} autoComplete="off">
             <Form.Group id="chat-input">
@@ -286,15 +288,20 @@ export default function Game() {
                     type="text"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Enter message here..."
-                     required
+                    required
                 />
             </Form.Group>
-            <Button id="exit-button" variant="primary" type="submit">
+            <Button id="chat-button" variant="primary" type="submit">
                 Send
             </Button>
         </Form>
       </div> 
+      <div className="buttons account-actions">
+        <button className="account-button text-left" onClick={() => handleReturn()}>
+          <img className="icon" src={Arrow}></img>
+          Exit Game
+        </button>
+      </div>
       
     </div>
   ) 

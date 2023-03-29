@@ -22,7 +22,6 @@ button {
 
 button:hover {
   border-color: black;
-
 }
 
 .onboard {
@@ -353,12 +352,6 @@ table thead tr:first-child th:last-child {
   border-top-right-radius: 10px;
 }
 
-/* td, th {
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: inherit;
-} */
-
 tbody tr:nth-child(odd) {
   background: #ffffff94;
 }
@@ -392,23 +385,25 @@ td:last-child button {
 }
 
 #chat-form { 
-  background: rgba(0, 0, 0, 0.15); 
+  width: 100%;
   padding: 0.25rem; 
-  position: fixed; 
-  bottom: 0; 
-  left: 0; 
-  right: 0; 
   display: flex; 
   height: 3rem; 
   box-sizing: border-box; 
-  backdrop-filter: blur(10px); 
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: sticky;
+  bottom: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #chat-input { 
   display: flex;
   align-items: center;
   border: none; 
-  padding: 0 1rem; 
+  width: 100%;
+  padding: 0 .5rem;
   flex-grow: 1; 
   border-radius: 2rem; 
   margin: 0.25rem; 
@@ -416,9 +411,13 @@ td:last-child button {
 }
 
 .game-chat {
-  width: 40%;
-  position: absolute;
-  right: 0;
+  width: 35%;
+  height: 45%;
+  position: fixed;
+  right: 10%;
+  background-color: #fcecd64a;
+  border-radius: 10px;
+  overflow: scroll;
 }
             
 #chat-input:focus { 
@@ -426,20 +425,43 @@ td:last-child button {
 }
 
 #chat-button { 
-  background: #333; 
+  background-color: #ebac43;
+  border: solid; 
+  border-color: transparent;
+  padding: 0 1rem; 
+  margin: 0.25rem; 
+  border-radius: 10px; 
+  outline: none; 
+}
+
+#chat-button:hover {
+  border-color: black;
+}
+
+#exit-button { 
+  background: rgb(181, 181, 181); 
   border: none; 
   padding: 0 1rem; 
   margin: 0.25rem; 
   border-radius: 3px; 
   outline: none; 
-  color: #fff; 
+  color: rgb(0, 0, 0); 
+}
+            
+#chat-messages { 
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0; 
+}
+      
+#chat-messages > li { 
+  padding: 0.5rem 1rem; 
 }
 
-#exit-button { background: rgb(181, 181, 181); border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: rgb(0, 0, 0); }
-            
-#chat-messages { list-style-type: none; margin: 0; padding: 0; margin-bottom: 48px; }
-      
-#chat-messages > li { padding: 0.5rem 1rem; }
+#chat-messages > li:first-child { 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px; 
+}
       
 #chat-messages > li:nth-child(odd) { 
   background: #ffffff94; 
@@ -450,4 +472,8 @@ td:last-child button {
   color: white;
 }
       
-#chat-label { display: flex; align-items: center; padding: 10px }
+#chat-label { 
+  display: flex; 
+  align-items: center; 
+  padding: 10px 
+}
