@@ -58,7 +58,7 @@ function SavedGames() {
                     if (!hidden) {
                         row.appendChild(player);
                     }
-                    
+
                     row.appendChild(opponent);
                     row.appendChild(winner);
                     row.appendChild(history);
@@ -114,7 +114,7 @@ function SavedGames() {
             <div className="buttons account-actions">
                 <button className="account-button text-left" onClick={() => navigate("/home")}>
                     <img className="icon" src={Arrow}></img>
-                    Return
+                    Return Home
                 </button>
             </div>
         </div>

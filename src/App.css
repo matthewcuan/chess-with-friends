@@ -432,7 +432,7 @@ td:last-child button {
   width: 35%;
   height: 45%;
   position: fixed;
-  top: 10%;
+  right: 10%;
 }
             
 #chat-input:focus { 
@@ -484,4 +484,8 @@ td:last-child button {
   display: flex; 
   align-items: center; 
   padding: 10px 
+}
+
+.update-button {
+  margin-top: 10%;
 }
