@@ -80,7 +80,7 @@ export default function GlobalChat() {
             <div className="buttons account-actions">
                 <button className="account-button text-left" onClick={() => navigate("/home")}>
                     <img className="icon" src={Arrow}></img>
-                    Exit Chat
+                    Return
                 </button>
             </div>
 

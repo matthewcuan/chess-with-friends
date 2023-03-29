@@ -332,10 +332,6 @@ button:hover {
   display: none;
 }
 
-.saved-screen {
-
-}
-
 table {
   width: 80%;
   border-collapse: collapse;
@@ -479,12 +475,7 @@ td:last-child button {
 #chat-messages > li { 
   padding: 0.5rem 1rem; 
 }
-
-/* #chat-messages > li:first-child { 
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px; 
-} */
-      
+ 
 #chat-messages > li:nth-child(odd) { 
   background: #ffffff4a; 
 }

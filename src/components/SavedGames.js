@@ -11,6 +11,7 @@ function SavedGames() {
     const [isLoading, setIsLoading] = useState(false);
     const cookies = new Cookies();
     const user = cookies.get("USER");
+    const [hidden, setHidden] = useState(true);
     const gamesRef = useRef(null);
     const tableRef = useRef(null);
     const navigate = useNavigate();
@@ -32,6 +33,9 @@ function SavedGames() {
                     const datetime = document.createElement('td');
                     datetime.innerText = data.datetime;
 
+                    const player = document.createElement('td');
+                    player.innerText = data.player1;
+
                     const opponent = document.createElement('td');
                     opponent.innerText = data.player2;
                     
@@ -50,6 +54,11 @@ function SavedGames() {
                     history.appendChild(review_button)
 
                     row.appendChild(datetime);
+
+                    if (!hidden) {
+                        row.appendChild(player);
+                    }
+                    
                     row.appendChild(opponent);
                     row.appendChild(winner);
                     row.appendChild(history);
@@ -70,6 +79,7 @@ function SavedGames() {
                 method: "get",
                 url: GAMES_API_URL + `public-games`
             });
+            setHidden(false);
         } else {
             console.log("getting user games")
             setConfiguration({
@@ -92,6 +102,7 @@ function SavedGames() {
                 <thead>
                     <tr>
                         <th>Date + Time</th>
+                        <th className={hidden ? 'hidden' : ''}>Player</th>
                         <th>Opponent</th>
                         <th>Winner</th>
                         <th>History</th>
