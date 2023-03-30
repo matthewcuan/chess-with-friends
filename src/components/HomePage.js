@@ -58,7 +58,7 @@ export default function HomePage() {
             <motion.aside
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: .5 }}
                 className="home-card"
             >
                 <Form className="game" noValidate validated={validated} onSubmit={handleJoin}>

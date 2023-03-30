@@ -58,33 +58,35 @@ export default function GlobalChat() {
     }
 
     return (
-        <div className="chat-container global-chat">
-            <ul id="chat-messages" ref={messagesRef}></ul>
-            <Form id="chat-form" noValidate onSubmit={handleSubmit}>
-                <Form.Group id="chat-input">
-                    <Form.Control
-                        id="chat-input"
-                        name="message"
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Enter message here..."
-                        autoComplete="false"
-                        required
-                    />
-                </Form.Group>
-                <Button id="chat-button" variant="primary" type="submit">
-                    Send
-                </Button>
-            </Form>
-            <div className="buttons account-actions">
-                <button className="account-button text-left" onClick={() => navigate("/home")}>
-                    <img className="icon" src={Arrow}></img>
-                    Return
-                </button>
-            </div>
-
-        </div>   
+        <div className="global-chat-page">
+            <div className="chat-container global-chat">
+                <ul id="chat-messages" ref={messagesRef}></ul>
+                <Form id="chat-form" noValidate onSubmit={handleSubmit}>
+                    <Form.Group id="chat-input">
+                        <Form.Control
+                            id="chat-input"
+                            name="message"
+                            type="text"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder="Enter message here..."
+                            autoComplete="false"
+                            required
+                        />
+                    </Form.Group>
+                    <Button id="chat-button" variant="primary" type="submit">
+                        Send
+                    </Button>
+                </Form>
+                <div className="buttons account-actions">
+                    <button className="account-button text-left" onClick={() => navigate("/home")}>
+                        <img className="icon" src={Arrow}></img>
+                        Return
+                    </button>
+                </div>
+            </div>  
+        </div>
+         
     )
 }
 

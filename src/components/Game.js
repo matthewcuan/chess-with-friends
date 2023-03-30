@@ -8,6 +8,7 @@ import io from "socket.io-client";
 import axios from "axios";
 import { GAMES_API_URL, SOCKET_URL } from "../utils/constants";
 import Arrow from "../assets/icons/arrow.png";
+import { motion } from "framer-motion";
 
 export default function Game() {
   
@@ -36,7 +37,7 @@ export default function Game() {
         }
     }
     checkLoggedIn(user);
-}); 
+  }); 
 
   // connects to socket and listens for events
   useEffect(() => {
@@ -99,14 +100,18 @@ export default function Game() {
       console.log(history);
       console.log("presenting save optoins")
       const msg = document.createElement('li');
-      msg.textContent = "Would you like to save this game?"
+      msg.textContent = "What would you like to do?"
       const save = document.createElement('button');
+      save.id = "chat-button";
+      save.className = "save-button"
       save.onclick = () => handleSaveOptions(saveHistory, players, winner);
-      save.textContent = 'Yes';
+      save.textContent = 'Save';
       msg.appendChild(save);
       const no_save = document.createElement('button');
-      no_save.textContent = 'No';
-      no_save.onclick = () => handleExit();
+      no_save.id = "chat-button";
+      no_save.className = "save-button"
+      no_save.textContent = 'Exit';
+      no_save.onclick = () => navigate('/home');;
       msg.appendChild(no_save);
       messagesRef.current.appendChild(msg);
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
@@ -170,33 +175,6 @@ export default function Game() {
     console.log(user + " left")
     navigate('/home');
   };
-
-  function handleExit() {
-    const msg = document.createElement('li');
-    msg.innerText = "Choose an option: "
-    const new_game = document.createElement('button');
-    new_game.textContent = 'New Game';
-    new_game.onclick = (event, socket) => handleRestart(event, socket);
-    msg.appendChild(new_game);
-    const exit_game = document.createElement('button');
-    exit_game.textContent = 'Exit Game';
-    exit_game.onclick = () => handleReturn();
-    msg.appendChild(exit_game);
-    messagesRef.current.appendChild(msg);
-    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-  }
-
-  // TODO: fix this
-  function handleRestart(event, socket) {
-    event.preventDefault();
-    if (socket) {
-      console.log("restarting")
-      socket.emit('message', "new game started");
-    } else {
-      game.reset()
-      socket.emit('message', "new game started");
-    }  
-  }
 
   function handleSaveOptions(saveHistory, players, winner) {
     console.log("showing options")
@@ -267,13 +245,20 @@ export default function Game() {
 
   return (
     <div className="main">
-      <div className="board">
-        <Chessboard 
-          position={board}
-          onPieceDrop={handlePieceDrop}
-          boardOrientation={orientation}
-        />
-      </div>
+      <motion.aside
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="main"
+      >
+        <div className="board">
+          <Chessboard 
+            position={board}
+            onPieceDrop={handlePieceDrop}
+            boardOrientation={orientation}
+          />
+        </div>
+      </motion.aside>
       <div className="chat-container game-chat" id="chat-box">
         <ul id="chat-messages" ref={messagesRef}></ul>
         <Form id="chat-form" noValidate onSubmit={handleSubmit} autoComplete="off">

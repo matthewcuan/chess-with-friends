@@ -428,6 +428,12 @@ td:last-child button {
   left: 20%;
 }
 
+.global-chat-page {
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(30% 35%,#ce6133, #4e160a);
+}
+
 .game-chat {
   width: 35%;
   height: 45%;
@@ -451,6 +457,12 @@ td:last-child button {
 
 #chat-button:hover {
   border-color: black;
+}
+
+.save-button {
+  background-color: white !important;
+  padding: 0 0.5rem !important;
+  margin: 10px !important;
 }
 
 #exit-button { 

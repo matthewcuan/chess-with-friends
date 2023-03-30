@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Arrow from "../assets/icons/arrow.png";
+import { motion } from "framer-motion";
 
 function SavedGames() {
 
@@ -96,9 +97,15 @@ function SavedGames() {
     }, [configuration])
 
     return (
+        
         <div className="saved-screen">
-            {isLoading && <p>Loading...</p>}
-            <table className='table'>
+            <motion.aside
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: .5 }}
+                className="saved-screen"
+            >
+                <table className='table'>
                 <thead>
                     <tr>
                         <th>Date + Time</th>
@@ -111,6 +118,7 @@ function SavedGames() {
                 <tbody ref={tableRef}>
                 </tbody>
             </table>
+            </motion.aside>
             <div className="buttons account-actions">
                 <button className="account-button text-left" onClick={() => navigate("/home")}>
                     <img className="icon" src={Arrow}></img>

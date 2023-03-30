@@ -84,7 +84,7 @@ export default function ChangePwd() {
             <motion.aside
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: .5 }}
                 className="home-card"
             >
                 <Form className="form" noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
