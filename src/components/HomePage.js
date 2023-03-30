@@ -56,28 +56,28 @@ export default function HomePage() {
             </div>
             
             <motion.aside
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
-                        className="home-card"
-                    >
-                    <Form className="game" noValidate validated={validated} onSubmit={handleJoin}>
-                        <Form.Label className="form-label home-label">Enter Game ID</Form.Label>
-                        <Form.Group className="input" controlId="validationCustomUsername">
-                            <Form.Control
-                                name="game"
-                                className="form-control-custom game-input"
-                                type="text"
-                                value={gameId}
-                                onChange={(e) => setGameId(e.target.value)}
-                                autoComplete="false"
-                                required
-                            />
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: .5 }}
+                className="home-card"
+            >
+                <Form className="game" noValidate validated={validated} onSubmit={handleJoin}>
+                    <Form.Label className="form-label home-label">Enter Game ID</Form.Label>
+                    <Form.Group className="input" controlId="validationCustomUsername">
+                        <Form.Control
+                            name="game"
+                            className="form-control-custom game-input"
+                            type="text"
+                            value={gameId}
+                            onChange={(e) => setGameId(e.target.value)}
+                            autoComplete="false"
+                            required
+                        />
                         <Button className="join-button" variant="primary" type="submit">
                             Join Game
                         </Button>
-                        </Form.Group>  
-                    </Form>
+                    </Form.Group>  
+                </Form>
                 <div className="buttons additional-home-buttons">
                     <button className="add-home-button" onClick={() => navigate('/gchat')}>
                         Chat with Others

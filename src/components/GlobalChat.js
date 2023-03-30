@@ -3,6 +3,8 @@ import io from 'socket.io-client'
 import Cookies from 'universal-cookie';
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import { SOCKET_URL } from '../utils/constants';
+import Arrow from "../assets/icons/arrow.png";
 
 export default function GlobalChat() {
 
@@ -24,7 +26,7 @@ export default function GlobalChat() {
     }); 
 
     useEffect(() => {
-        const socket = io("https://chesswithfriends-socketio.herokuapp.com");
+        const socket = io(SOCKET_URL);
         setSocket(socket);
 
         socket.on('connect', () => {
@@ -36,7 +38,7 @@ export default function GlobalChat() {
             item.textContent = msg;
             console.log("adding message")
             messagesRef.current.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
         });
 
         return () => {
@@ -56,30 +58,35 @@ export default function GlobalChat() {
     }
 
     return (
-        <div>
-            <ul id="chat-messages" ref={messagesRef}></ul>
-            <Form id="chat-form" noValidate onSubmit={handleSubmit}>
-                <Form.Group id="chat-input">
-                    <Form.Control
-                        id="chat-input"
-                        name="message"
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Enter message here..."
-                        autoComplete="false"
-                        required
-                    />
-                </Form.Group>
-                <Button id="chat-button" variant="primary" type="submit">
-                    Send
-                </Button>
-                <button id="exit-button" onClick={() => navigate('/home')}>
-                    Return Home
-                </button>
-            </Form>
-
-        </div>   
+        <div className="global-chat-page">
+            <div className="chat-container global-chat">
+                <ul id="chat-messages" ref={messagesRef}></ul>
+                <Form id="chat-form" noValidate onSubmit={handleSubmit}>
+                    <Form.Group id="chat-input">
+                        <Form.Control
+                            id="chat-input"
+                            name="message"
+                            type="text"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder="Enter message here..."
+                            autoComplete="false"
+                            required
+                        />
+                    </Form.Group>
+                    <Button id="chat-button" variant="primary" type="submit">
+                        Send
+                    </Button>
+                </Form>
+                <div className="buttons account-actions">
+                    <button className="account-button text-left" onClick={() => navigate("/home")}>
+                        <img className="icon" src={Arrow}></img>
+                        Return
+                    </button>
+                </div>
+            </div>  
+        </div>
+         
     )
 }
 
