@@ -1,39 +1,23 @@
-## To do
+CHESS WITH FRIENDS
 
-[X] Set up react app
-[X] Write logic for chess game
-[X] Build pages for front end
-[ ] Complete login mechanism
-[ ] Connect to backend
+[Link to live website](https://melodious-speculoos-b36439.netlify.app/)
+[Link to personal portfolio](matthew-cuan.com)
 
-## Packages
+## About
 
-[X] use fetch api from js (for requests to server)
-[X] universal-cookie (for user authentication)
-- stream-chat (for live chat)
-[X] react-router-dom (for routes)
+Online multiplayer chess app with login authentication, real time gameplay and chat, and saved game history
 
-## Client Structure
+## Technologies
 
-├── src
-│   ├── components 
-│   │   ├── login.js
-│   │   ├── sign_up.js
-│   │   ├── profile.js
-│   │   ├── game.js
-│   │   ├── game_history.js
-│   ├── index.js
-│   ├── index.css
-│   ├── app.js
-│   ├── app.css
-├── public
-│   ├── index.html
-│   ├── mainfest.json
-│   ├── robots.txt
-├── node_modules
-├── package.json
-├── package-lock.json 
-└── .gitignore
+Framework: MERN stack (MongoDB, Express, React, Node)
+Languages: JavaScript, HTML, CSS
+
+## Folder Structure
+
+- assets  
+- components // contains react components
+- onboard // contains react components relating to login
+- utils // contains constants
 
 ## Routes
 
