@@ -3,6 +3,8 @@ import { GAMES_API_URL, HOST_URL } from '../utils/constants';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Arrow from "../assets/icons/arrow.png";
+import { motion } from "framer-motion";
 
 function SavedGames() {
 
@@ -10,6 +12,7 @@ function SavedGames() {
     const [isLoading, setIsLoading] = useState(false);
     const cookies = new Cookies();
     const user = cookies.get("USER");
+    const [hidden, setHidden] = useState(true);
     const gamesRef = useRef(null);
     const tableRef = useRef(null);
     const navigate = useNavigate();
@@ -31,6 +34,9 @@ function SavedGames() {
                     const datetime = document.createElement('td');
                     datetime.innerText = data.datetime;
 
+                    const player = document.createElement('td');
+                    player.innerText = data.player1;
+
                     const opponent = document.createElement('td');
                     opponent.innerText = data.player2;
                     
@@ -49,6 +55,11 @@ function SavedGames() {
                     history.appendChild(review_button)
 
                     row.appendChild(datetime);
+
+                    if (!hidden) {
+                        row.appendChild(player);
+                    }
+
                     row.appendChild(opponent);
                     row.appendChild(winner);
                     row.appendChild(history);
@@ -69,6 +80,7 @@ function SavedGames() {
                 method: "get",
                 url: GAMES_API_URL + `public-games`
             });
+            setHidden(false);
         } else {
             console.log("getting user games")
             setConfiguration({
@@ -85,12 +97,19 @@ function SavedGames() {
     }, [configuration])
 
     return (
-        <div className="main">
-            {isLoading && <p>Loading...</p>}
-            <table className='table'>
+        
+        <div className="saved-screen">
+            <motion.aside
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: .5 }}
+                className="saved-screen"
+            >
+                <table className='table'>
                 <thead>
                     <tr>
                         <th>Date + Time</th>
+                        <th className={hidden ? 'hidden' : ''}>Player</th>
                         <th>Opponent</th>
                         <th>Winner</th>
                         <th>History</th>
@@ -99,10 +118,13 @@ function SavedGames() {
                 <tbody ref={tableRef}>
                 </tbody>
             </table>
-            <ul id="chat-messages" ref={gamesRef}></ul>
-            <button onClick={() => navigate('/home')}>
-                Return Home
-            </button>
+            </motion.aside>
+            <div className="buttons account-actions">
+                <button className="account-button text-left" onClick={() => navigate("/home")}>
+                    <img className="icon" src={Arrow}></img>
+                    Return Home
+                </button>
+            </div>
         </div>
     )
 }

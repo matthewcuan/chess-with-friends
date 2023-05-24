@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { motion } from "framer-motion";
+import Arrow from "../assets/icons/arrow.png";
 
 export default function ChangePwd() {
 
@@ -74,38 +76,54 @@ export default function ChangePwd() {
     };
 
     return (
-        <div className="signup">
-            <h1>Change Password</h1>
-            <Form className="form" noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
-                <Form.Group className="input" controlId="validationCustomOld">
-                    <Form.Label>Old Password: </Form.Label>
-                    <Form.Control
-                        name="old"
-                        type="text"
-                        value={old}
-                        onChange={(e) => setOld(e.target.value)}
-                        placeholder="Enter old password"
-                        required
-                    />
-                </Form.Group>
-                <Form.Group className="input" controlId="validationCustomNewPassword">
-                    <Form.Label>New Password: </Form.Label>
-                    <Form.Control
-                        name="newPassword"
-                        type="text"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        placeholder="Enter new password"
-                        required
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Update
-                </Button>
-            </Form>
-            <button onClick={() => navigate('/home')}>
-                Return to home page
-            </button>
+        <div id="home">
+            <div className="welcome-card">
+                <p className="welcome-title">Chess with Friends</p>
+                <p className="welcome">Welcome, {user}!</p>
+            </div>
+            <motion.aside
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: .5 }}
+                className="home-card"
+            >
+                <Form className="form" noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
+                    <Form.Group className="input" controlId="validationCustomOld">
+                        <Form.Label className="form-label">Old Password: </Form.Label>
+                        <Form.Control
+                            name="old"
+                            type="text"
+                            className="form-control-custom game-input"
+                            value={old}
+                            onChange={(e) => setOld(e.target.value)}
+                            placeholder="Enter old password"
+                            required
+                        />
+                    </Form.Group>
+                    <Form.Group className="input" controlId="validationCustomNewPassword">
+                        <Form.Label>New Password: </Form.Label>
+                        <Form.Control
+                            name="newPassword"
+                            type="text"
+                            className="form-control-custom game-input"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            placeholder="Enter new password"
+                            required
+                        />
+                    </Form.Group>
+                    <Button className="join-button update-button" variant="primary" type="submit">
+                        Change Password
+                    </Button>
+                </Form>
+            </motion.aside>
+            
+            <div className="buttons account-actions">
+                <button className="account-button text-left" onClick={() => navigate("/home")}>
+                    <img className="icon" src={Arrow}></img>
+                    Return Home
+                </button>
+            </div>
         </div>
         
     )

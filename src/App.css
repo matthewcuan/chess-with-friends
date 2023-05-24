@@ -10,6 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: radial-gradient(35% 40% at 30% 50%,#ce6133, #4e160a)
 }
 
 button {
@@ -22,7 +23,6 @@ button {
 
 button:hover {
   border-color: black;
-
 }
 
 .onboard {
@@ -172,7 +172,7 @@ button:hover {
   bottom: 0;
 }
 
-#home {
+#home, .saved-screen {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -353,12 +353,6 @@ table thead tr:first-child th:last-child {
   border-top-right-radius: 10px;
 }
 
-/* td, th {
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: inherit;
-} */
-
 tbody tr:nth-child(odd) {
   background: #ffffff94;
 }
@@ -392,33 +386,59 @@ td:last-child button {
 }
 
 #chat-form { 
-  background: rgba(0, 0, 0, 0.15); 
+  width: 100%;
   padding: 0.25rem; 
-  position: fixed; 
-  bottom: 0; 
-  left: 0; 
-  right: 0; 
   display: flex; 
   height: 3rem; 
   box-sizing: border-box; 
-  backdrop-filter: blur(10px); 
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: sticky;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #chat-input { 
   display: flex;
   align-items: center;
   border: none; 
-  padding: 0 1rem; 
+  width: 100%;
+  padding: 0 .5rem;
   flex-grow: 1; 
   border-radius: 2rem; 
   margin: 0.25rem; 
   height: 80%;
 }
 
+.chat-container {
+  background-color: #fcecd64a;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#chat-input::placeholder {
+  color: black;
+}
+
+.global-chat {
+  width: 60%;
+  height: 80%;
+  position: fixed;
+  top: 10%;
+  left: 20%;
+}
+
+.global-chat-page {
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(30% 35%,#ce6133, #4e160a);
+}
+
 .game-chat {
-  width: 40%;
-  position: absolute;
-  right: 0;
+  width: 35%;
+  height: 45%;
+  position: fixed;
+  right: 10%;
 }
             
 #chat-input:focus { 
@@ -426,28 +446,58 @@ td:last-child button {
 }
 
 #chat-button { 
-  background: #333; 
+  background-color: #ebac43;
+  border: solid; 
+  border-color: transparent;
+  padding: 0 1rem; 
+  margin: 0.25rem; 
+  border-radius: 10px; 
+  outline: none; 
+}
+
+#chat-button:hover {
+  border-color: black;
+}
+
+.save-button {
+  background-color: white !important;
+  padding: 0 0.5rem !important;
+  margin: 10px !important;
+}
+
+#exit-button { 
+  background: rgb(181, 181, 181); 
   border: none; 
   padding: 0 1rem; 
   margin: 0.25rem; 
   border-radius: 3px; 
   outline: none; 
-  color: #fff; 
+  color: rgb(0, 0, 0); 
 }
-
-#exit-button { background: rgb(181, 181, 181); border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: rgb(0, 0, 0); }
             
-#chat-messages { list-style-type: none; margin: 0; padding: 0; margin-bottom: 48px; }
+#chat-messages { 
+  list-style-type: none; 
+  height: calc(100% - 50px); /* Subtract the height of the input form from the chat box height */
+  overflow: scroll;
+  color: white;
+  margin: 0;
+  padding: 0; 
+}
       
-#chat-messages > li { padding: 0.5rem 1rem; }
-      
+#chat-messages > li { 
+  padding: 0.5rem 1rem; 
+}
+ 
 #chat-messages > li:nth-child(odd) { 
-  background: #ffffff94; 
+  background: #ffffff4a; 
+}
+      
+#chat-label { 
+  display: flex; 
+  align-items: center; 
+  padding: 10px 
 }
 
-#chat-messages > li:nth-child(even) { 
-  background: #ffffff43; 
-  color: white;
+.update-button {
+  margin-top: 10%;
 }
-      
-#chat-label { display: flex; align-items: center; padding: 10px }
