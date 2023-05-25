@@ -11,7 +11,27 @@ Online multiplayer chess app with login authentication, real time gameplay and c
 ## Technologies
 
 Framework: MERN stack (MongoDB, Express, React, Node)
+
 Languages: JavaScript, HTML, CSS
+
+## Dependencies
+
+React, Axios, chess.js, framer-motion, socket.io-client, universal cookie
+
+## Deployment
+
+To get started:
+
+```
+git clone https://github.com/matthewcuan/chess-with-friends.git
+cd chess-with-friends
+```
+
+To run:
+
+```
+npm start
+```
 
 ## Folder Structure
 
