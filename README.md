@@ -1,6 +1,7 @@
 CHESS WITH FRIENDS
 
 [Link to live website](https://melodious-speculoos-b36439.netlify.app/)
+
 [Link to personal portfolio](matthew-cuan.com)
 
 ## About
@@ -19,36 +20,8 @@ Languages: JavaScript, HTML, CSS
 - onboard // contains react components relating to login
 - utils // contains constants
 
-## Routes
+## Backend
 
-PATHS         OPERATIONS
-------------------------
-- /           | getAllUsers -> checks if player has an account
-- /password   | getUserbyId -> checks if player input correct password
-- /profile/:id| getGameById -> returns games played by player
-- /game       | postGame -> adds game history to db
-- /signup     | addUser -> add player's login info to db
-- /history    | getGames -> returns all public games
+[Link to RESTful API](https://github.com/matthewcuan/chess-backend)
 
-## Flow
-
-- User opens web app and chooses between:
-    1. Logging in
-        a. Enter username (getUser) (../)
-            - checks if username exists in db
-            - routes to password page with username as a param
-        b. Enter password (getUser) (../password/:user)
-            - compares input password with password associated with user account
-        c. Enters profile page (../profile/:user)
-            - can choose between:
-                1. starting a game
-                2. joining a game
-                3. logging out
-            - all games (public + private) displayed below options
-                1. user can choose to filter which games appear 
-    2. Signing up
-        a. Enters username and password (addUser) (../signup)
-            - posts new account into db to be accessed later on login
-        b. Enters profile page (../profile/:user): see 1c above
-    3. Viewing public games
-        a. Displays all publicly saved games
+[Link to web socket](https://github.com/matthewcuan/chess-socketio)
