@@ -42,6 +42,6 @@ npm start
 
 ## Backend
 
-[Link to RESTful API](https://github.com/matthewcuan/chess-backend)
+[Link to onboard backend](https://github.com/matthewcuan/chess-backend)
 
 [Link to web socket](https://github.com/matthewcuan/chess-socketio)
