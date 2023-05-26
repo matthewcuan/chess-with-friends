@@ -4,7 +4,7 @@ CHESS WITH FRIENDS
 
 [Link to personal portfolio](matthew-cuan.com)
 
-## About
+## Overview
 
 Online multiplayer chess app with login authentication, real time gameplay and chat, and saved game history
 
@@ -30,6 +30,7 @@ cd chess-with-friends
 To run:
 
 ```
+npm install
 npm start
 ```
 
