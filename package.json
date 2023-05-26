@@ -24,6 +24,12 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@svgr/webpack": "^6.5.1"
+  },
+  "overrides": {
+    "@svgr/webpack": "$@svgr/webpack"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -47,11 +53,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@svgr/webpack": "^6.5.1"
-  },
-  "overrides": {
-    "@svgr/webpack": "$@svgr/webpack"
   }
 }
