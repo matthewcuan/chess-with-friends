@@ -515,6 +515,7 @@ td:last-child button {
   font-family: "Font Awesome 5 Brands";
   padding-right: 10px;
   color: #ebac43;
+  font-size: larger;
 }
 
 .fa-twitter:before {
