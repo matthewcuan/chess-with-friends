@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import LoginImage from '../assets/images/chess-login.png';
 import { motion } from "framer-motion";
 import TitleCard from "../components/TitleCard";
+import ContactBar from "../components/ContactBar";
 
 
 export default function Login() {

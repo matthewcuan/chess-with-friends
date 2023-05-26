@@ -11,12 +11,14 @@ import ChangePwd from "./components/ChangePwd";
 import GlobalChat from "./components/GlobalChat";
 import ReviewHistory from "./components/ReviewHistory";
 import SavedGames from "./components/SavedGames";
+import ContactBar from "./components/ContactBar";
 
 
 export default function App() {
 
   return (
-    <Router>
+    <div>
+      <Router>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/password" element={<Password />} />
@@ -28,7 +30,10 @@ export default function App() {
           <Route path="/review" element={<ReviewHistory />} />
           <Route path="/saved" element={<SavedGames />} />
         </Routes>
-    </Router>
+      </Router>
+      <ContactBar />
+    </div>
+    
     
   )
 } 

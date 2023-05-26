@@ -7,6 +7,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import LoginImage from '../assets/images/chess-login.png';
 import TitleCard from "../components/TitleCard";
+import ContactBar from "../components/ContactBar";
 
 export default function SignUp() {
 
@@ -105,7 +106,7 @@ export default function SignUp() {
             </div>
             <div className="login-image">
                 <img src={LoginImage}></img>
-            </div>  
+            </div> 
         </div>
     )   
 }

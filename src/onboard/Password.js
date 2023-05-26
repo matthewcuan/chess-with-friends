@@ -7,6 +7,7 @@ import axios from "axios";
 import { BASE_API_URL } from "../utils/constants";
 import { motion } from "framer-motion";
 import TitleCard from "../components/TitleCard";
+import ContactBar from "../components/ContactBar";
 
 export default function Password() {
 
