@@ -7,7 +7,6 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import LoginImage from '../assets/images/chess-login.png';
 import TitleCard from "../components/TitleCard";
-import ContactBar from "../components/ContactBar";
 
 export default function SignUp() {
 
@@ -40,7 +39,7 @@ export default function SignUp() {
         axios(configuration)
         .then((response) => {
             if (response.data.status) {
-                console.log(response.data);
+                // console.log(response.data);
                 
                 cookies.set("USER", username, {
                     path: BASE_API_URL

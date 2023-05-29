@@ -22,14 +22,9 @@ function SavedGames() {
         console.log("fetching games")
         axios(config)
             .then((response) => {
-                
-                console.log(response);
-                console.log(response.data);
-                console.log(response.data.length);
                 for (let i = (response.data.length - 1); i >= 0; i--) {
                     const data = response.data[i];
-                    console.log(data)
-
+                    
                     const row = document.createElement('tr');
                     const datetime = document.createElement('td');
                     datetime.innerText = data.datetime;

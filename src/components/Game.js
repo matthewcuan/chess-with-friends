@@ -89,16 +89,10 @@ export default function Game() {
     })
 
     socket.on('save options', (data) => {
-      console.log("receiving data from server")
       saveHistory = data.history
-      console.log(saveHistory)
       players = data.users
-      console.log(players)
       winner = data.winner;
-      console.log("winner: " + winner)
       setHistory(history);
-      console.log(history);
-      console.log("presenting save optoins")
       const msg = document.createElement('li');
       msg.textContent = "What would you like to do?"
       const save = document.createElement('button');
@@ -124,9 +118,7 @@ export default function Game() {
 
   // updates board history each time board changes
   useEffect(() => {
-    console.log('setting new board: ' + board)
     setHistory(prevHistory => [...prevHistory, game.fen()]);
-    console.log(history);
   }, [board])
 
   // EVENT HANDLERS
@@ -177,8 +169,6 @@ export default function Game() {
   };
 
   function handleSaveOptions(saveHistory, players, winner) {
-    console.log("showing options")
-    console.log(saveHistory)
     const msg = document.createElement('li');
     msg.innerText = "Choose a save option: "
     const public_save = document.createElement('button');

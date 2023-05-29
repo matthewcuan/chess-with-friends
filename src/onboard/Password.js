@@ -7,7 +7,6 @@ import axios from "axios";
 import { BASE_API_URL } from "../utils/constants";
 import { motion } from "framer-motion";
 import TitleCard from "../components/TitleCard";
-import ContactBar from "../components/ContactBar";
 
 export default function Password() {
 
@@ -36,7 +35,7 @@ export default function Password() {
         axios(configuration)
         // if user exists
         .then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
             cookies.set("USER", response.data.user, {
                 path: "/"
               });

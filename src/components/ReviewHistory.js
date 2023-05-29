@@ -27,8 +27,6 @@ export default function ReviewHistory() {
             .then((response) => {
                 setHistory(response.data.history);
                 setBoard(history[0]);
-                console.log(history[0]);
-                console.log(board);
                 setHistoryFetched(true);
             })
             // if user does not exist
@@ -41,15 +39,10 @@ export default function ReviewHistory() {
         
     }, [historyFetched])
     
-    console.log(board)
-
     function handleNext() {
-        console.log(history.length)
-        console.log(move + 1)
         if ((move + 1) < history.length) {
             setMove(move => move + 1);
             setBoard(history[move + 1]);
-            console.log(move + 1);
         } else {
             alert("You've reached the end of the game.")
         }
@@ -59,7 +52,6 @@ export default function ReviewHistory() {
         if (move - 1 >= 0) {
             setMove(move => move - 1);
             setBoard(history[move - 1]);
-            console.log(move - 1)
         } else {
             alert("This is the beginning of the game.")
         }
