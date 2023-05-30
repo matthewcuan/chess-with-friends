@@ -1,8 +1,10 @@
-CHESS WITH FRIENDS
+# CHESS WITH FRIENDS
 
 [Link to live website](https://melodious-speculoos-b36439.netlify.app/)
 
 [Link to personal portfolio](matthew-cuan.com)
+
+![alt text](src/assets/images/preview.png)
 
 ## Overview
 
