@@ -4,7 +4,7 @@
 
 [Link to personal portfolio](matthew-cuan.com)
 
-![alt text](src/assets/images/preview.png)
+![Preview](src/assets/images/preview.png)
 
 ## Overview
 
@@ -42,6 +42,10 @@ npm start
 - components // contains react components
 - onboard // contains react components relating to login
 - utils // contains constants
+
+## Notes
+
+This app is optimized for desktop. Responsiveness will be implemented in the future.
 
 ## Backend
 
