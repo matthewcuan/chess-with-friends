@@ -2,7 +2,7 @@
 
 [Link to live website](https://melodious-speculoos-b36439.netlify.app/)
 
-[Link to personal portfolio](matthew-cuan.com)
+[Link to personal portfolio](https://matthew-cuan.com)
 
 ![Preview](src/assets/images/preview.png)
 
