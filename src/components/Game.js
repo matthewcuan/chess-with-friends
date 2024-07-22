@@ -29,7 +29,7 @@ export default function Game() {
 
   const gameId = useMemo(() => new Cookies().get("GAME_ID"), []);
 
-  // checks if user is logge din
+  // checks if user is logged in
   useEffect( () => {
     const checkLoggedIn = async () => {
         if (!user) {

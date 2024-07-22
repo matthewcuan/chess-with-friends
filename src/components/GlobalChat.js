@@ -15,7 +15,7 @@ export default function GlobalChat() {
     const messagesRef = useRef(null);
     const navigate = useNavigate();
 
-    // checks if user is logge din
+    // checks if user is logged in
     useEffect( () => {
         const checkLoggedIn = async () => {
             if (!user) {

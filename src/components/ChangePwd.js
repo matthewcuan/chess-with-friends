@@ -15,7 +15,7 @@ export default function ChangePwd() {
     const navigate = useNavigate();
     const user = useMemo(() => new Cookies().get("USER"), []);
 
-    // checks if user is logge din
+    // checks if user is logged in
     useEffect( () => {
         const checkLoggedIn = async () => {
             if (!user) {

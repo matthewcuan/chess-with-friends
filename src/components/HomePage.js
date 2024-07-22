@@ -21,7 +21,7 @@ export default function HomePage() {
     const cookies = new Cookies();
     const user = cookies.get("USER");
 
-    checks if user is logged in
+    // checks if user is logged in
     useEffect( () => {
         const checkLoggedIn = async () => {
             if (!user) {
