@@ -211,7 +211,7 @@ button:hover {
 
 .home-label {
   position: relative;
-  left: -22%;
+  margin: 0px 8.5px;
 }
 
 .join-button {
@@ -290,7 +290,7 @@ button:hover {
 .game {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin: 5px;
 }
 

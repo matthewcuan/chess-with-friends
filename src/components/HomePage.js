@@ -21,7 +21,7 @@ export default function HomePage() {
     const cookies = new Cookies();
     const user = cookies.get("USER");
 
-    // checks if user is logge din
+    checks if user is logged in
     useEffect( () => {
         const checkLoggedIn = async () => {
             if (!user) {
@@ -62,7 +62,7 @@ export default function HomePage() {
                 className="home-card"
             >
                 <Form className="game" noValidate validated={validated} onSubmit={handleJoin}>
-                    <Form.Label className="form-label home-label">Enter Game ID</Form.Label>
+                    <Form.Label className="form-label home-label">Join or Create Game</Form.Label>
                     <Form.Group className="input" controlId="validationCustomUsername">
                         <Form.Control
                             name="game"
@@ -71,6 +71,7 @@ export default function HomePage() {
                             value={gameId}
                             onChange={(e) => setGameId(e.target.value)}
                             autoComplete="false"
+                            placeholder="Enter Game ID"
                             required
                         />
                         <Button className="join-button" variant="primary" type="submit">
